@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Shivam Rustagi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --text-secondary: #6b6b6b;
+    --border: #e5e5e5;
+    --surface: #f7f6f3;
+    --callout-yellow: #fdf6e3;
+    --callout-yellow-border: #e8d89a;
+    --callout-blue: #eef3fb;
+    --callout-blue-border: #c4d7f0;
+    --callout-gray: #f1f0ef;
+    --accent: #2383e2;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 44px;
+    display: flex; align-items: center;
+    font-size: 13.5px; color: var(--text-secondary);
+  }
+  .topbar-title { font-weight: 500; color: var(--text); }
+  .topbar-links { display: flex; gap: 1.5rem; margin-left: auto; }
+  .topbar-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+  .topbar-links a:hover { color: var(--text); }
+
+  /* COVER */
+  .cover {
+    height: 120px;
+    background: linear-gradient(120deg, #e8e0f8 0%, #c9dff7 50%, #d0ede8 100%);
+  }
+
+  /* PAGE */
+  .page { max-width: 720px; margin: 0 auto; padding: 2.5rem 3rem 6rem; }
+
+  /* TITLE */
+  .page-title {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.5px;
+    color: var(--text); margin-bottom: 0.25rem; line-height: 1.2;
+  }
+  .page-subtitle {
+    font-size: 15px; color: var(--text-secondary); margin-bottom: 0.75rem;
+  }
+  .page-contact {
+    font-size: 14px; color: var(--text-secondary); margin-bottom: 2rem;
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center;
+  }
+  .page-contact a { color: var(--accent); text-decoration: none; }
+  .page-contact a:hover { text-decoration: underline; }
+
+  /* HEADINGS */
+  .h1 {
+    font-size: 1.875rem; font-weight: 700; letter-spacing: -0.3px;
+    color: var(--text); margin: 2.5rem 0 0.6rem; line-height: 1.25;
+  }
+  .h2 {
+    font-size: 1.3rem; font-weight: 600;
+    color: var(--text); margin: 1.75rem 0 0.5rem; line-height: 1.3;
+  }
+  .h3 {
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--text); margin: 1.4rem 0 0.4rem;
+  }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 1.75rem 0; }
+
+  /* PARAGRAPHS */
+  p { font-size: 16px; line-height: 1.7; color: var(--text); margin-bottom: 0.6rem; }
+  p strong { font-weight: 600; }
+
+  /* BULLET LIST */
+  ul.nlist { list-style: none; margin: 0.4rem 0 0.75rem 0; padding: 0; }
+  ul.nlist li {
+    font-size: 16px; line-height: 1.65; color: var(--text);
+    padding: 2px 0 2px 1.5rem; position: relative;
+  }
+  ul.nlist li::before {
+    content: '•'; position: absolute; left: 0.45rem;
+    color: var(--text-secondary); font-size: 14px;
+  }
+
+  /* CALLOUT GRID */
+  .callout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1rem 0; }
+  .callout { border-radius: 6px; padding: 1rem 1.1rem; font-size: 15px; line-height: 1.6; }
+  .callout.yellow { background: var(--callout-yellow); border: 1px solid var(--callout-yellow-border); }
+  .callout.blue   { background: var(--callout-blue);   border: 1px solid var(--callout-blue-border); }
+  .callout-label {
+    font-size: 12px; font-weight: 600; color: var(--text-secondary);
+    margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .callout-icon {
+    width: 16px; height: 16px; border-radius: 3px;
+    background: rgba(0,0,0,0.07); display: inline-flex;
+    align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0;
+  }
+  .callout p { margin: 0; font-size: 15px; line-height: 1.55; }
+  .callout p + p { margin-top: 5px; }
+
+  /* CASE STUDY CARD GRID */
+  .cs-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:1.5rem 0 2rem; }
+  .cs-card {
+    border:1px solid var(--border); border-radius:12px; padding:1.4rem 1.5rem;
+    background:#fff; cursor:pointer; transition:box-shadow 0.2s, transform 0.15s;
+    position:relative;
+  }
+  .cs-card:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08); transform:translateY(-2px); }
+  .cs-card-top { display:flex; align-items:center; gap:10px; margin-bottom:0.9rem; }
+  .cs-icon-wrap {
+    width:36px; height:36px; border-radius:8px;
+    background:#fdf1ee; display:flex; align-items:center; justify-content:center;
+    font-size:16px; flex-shrink:0;
+  }
+  .cs-tag { font-size:12px; font-weight:600; color:#c0533a; flex:1; }
+  .cs-arrow {
+    font-size:14px; color:var(--text-secondary);
+    position:absolute; top:1.2rem; right:1.2rem;
+  }
+  .cs-card-title { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:0.4rem; line-height:1.3; }
+  .cs-card-desc { font-size:13px; color:var(--text-secondary); line-height:1.55; margin-bottom:1rem; }
+  .cs-badges { display:flex; flex-wrap:wrap; gap:6px; }
+  .cs-badge {
+    font-size:11px; font-weight:500; color:#6b6b6b;
+    background:#f5f4f2; border:1px solid var(--border);
+    border-radius:100px; padding:3px 10px;
+  }
+
+  /* CASE STUDY DETAIL PANEL */
+  .cs-detail { padding-top:0.5rem; }
+  .cs-detail-header { display:flex; align-items:center; gap:1rem; margin-bottom:0.5rem; padding:1rem 0 0.5rem; border-bottom:1px solid var(--border); }
+  .cs-back {
+    font-size:13px; font-weight:500; color:var(--accent);
+    background:none; border:none; cursor:pointer; padding:0;
+    display:flex; align-items:center; gap:4px;
+  }
+  .cs-back:hover { text-decoration:underline; }
+  .cs-detail-tag {
+    font-size:11px; font-weight:600; color:#c0533a;
+    background:#fdf1ee; padding:3px 10px; border-radius:100px;
+    letter-spacing:0.04em; text-transform:uppercase;
+  }
+
+  /* TOGGLE */
+  .toggle { margin: 0.75rem 0; }
+  .toggle-header {
+    display: flex; align-items: center; gap: 6px; cursor: pointer;
+    user-select: none; font-size: 16px; font-weight: 600; color: var(--text); padding: 2px 0;
+  }
+  .toggle-arrow {
+    display: inline-block; width: 18px; height: 18px;
+    text-align: center; line-height: 18px; font-size: 11px;
+    color: var(--text-secondary); transition: transform 0.2s; flex-shrink: 0;
+  }
+  .toggle.open .toggle-arrow { transform: rotate(90deg); }
+  .toggle-body { display: none; padding-left: 1.5rem; margin-top: 6px; }
+  .toggle.open .toggle-body { display: block; }
+
+  /* COMPETENCY ROW */
+  .comp-row { font-size: 16px; margin-bottom: 0.5rem; line-height: 1.65; }
+  .comp-row strong { font-weight: 600; }
+  .comp-row span { color: var(--text-secondary); }
+
+  /* EXP ENTRY */
+  .exp-role { font-size: 1.05rem; font-weight: 600; color: var(--text); margin: 1.5rem 0 0.3rem; }
+
+  /* LINKS */
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .page { padding: 1.5rem 1.25rem 4rem; }
+    .callout-grid { grid-template-columns: 1fr; }
+    .topbar-links { display: none; }
+    .page-title { font-size: 1.9rem; }
+    .h1 { font-size: 1.5rem; }
+    .cs-grid { grid-template-columns: 1fr; }
+    #about > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-title">Portfolio — Shivam Rustagi</span>
+  <nav class="topbar-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#case-studies">Product Case Studies</a>
+    <a href="#ai-case-studies">AI Case Studies</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="cover"></div>
+
+<div class="page">
+
+  <!-- PAGE TITLE -->
+  <h1 class="page-title">Portfolio — Shivam Rustagi</h1>
+  <div class="page-subtitle">Product Owner</div>
+  <div class="page-contact">
+    <span>+91-8307104267, 9008321040</span>
+    <a href="mailto:shivamrustagi.naukri@gmail.com">shivamrustagi.naukri@gmail.com</a>
+    <span>Bangalore</span>
+    <a href="https://www.linkedin.com/in/shivam-rustagi-16807bb6/" target="_blank">LinkedIn</a>
+
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about">
+    <div style="display:grid; grid-template-columns:1fr; gap:3rem; align-items:center; padding: 1.5rem 0 0.5rem;">
+      <!-- Left: Text -->
+      <div>
+        <div style="font-size:11px; font-weight:700; color:#c0533a; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.85rem;">About Me</div>
+        <div style="font-size:2rem; font-weight:700; line-height:1.2; color:var(--text); margin-bottom:1.25rem;">Building products that drive impact</div>
+        <p style="font-size:15px; color:#444; line-height:1.7;">Product Owner with 7.2 years' experience (4yoe in product) delivering end-to-end features for global products. Strong in backlog ownership, PRDs, Agile/Scrum delivery, and stakeholder alignment, driving <strong>£5.6M+</strong> cost savings, <strong>4.5/5 CSAT</strong>, improved driving comfort for <strong>2,000 users</strong>, and supporting AUM growth from <strong>₹65 Cr to ₹90 Cr</strong>. Passionate about learning and building impactful 0-1 products.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- COMPETENCIES -->
+  <div id="competencies">
+    <div class="toggle open">
+      <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="toggle-arrow">▶</span>
+        <span class="h1" style="margin:0;">Competencies</span>
+      </div>
+      <div class="toggle-body">
+        <hr class="divider">
+        <div class="comp-row"><strong>Product:</strong> <span> Product discovery &amp; strategy, Roadmapping, User Research, A/B Testing, PDLC, PRD, Prioritization.</span></div>
+        <div class="comp-row"><strong>Tools:</strong> <span> JIRA, Confluence, Figma, Balsamiq, Power BI, SQL.</span></div>
+        <div class="comp-row"><strong>Leadership:</strong> <span> Cross-functional Collaboration, Stakeholder Management, Cost Optimization, Negotiation.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- EXPERIENCE -->
+  <div id="experience">
+    <div class="toggle open">
+      <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="toggle-arrow">▶</span>
+        <span class="h1" style="margin:0;">Experience</span>
+      </div>
+      <div class="toggle-body">
+        <hr class="divider">
+        <div class="h2">Where I've worked</div>
+
+        <div class="exp-role">Dec 2021 – Present &bull; Product Owner — Tata Elxsi (India)</div>
+        <p style="color:var(--text-secondary); font-size:15px; margin-bottom:0.5rem;">As a PO, Led end-to-end delivery of JLR suspension features, enabling on-time global launches via Agile and cross-functional alignment.</p>
+        <ul class="nlist">
+          <li>Led a post-launch NVH issue as a product risk, aligning customer perception, engineering trade-offs, and supplier execution to eliminate cabin noise across ~2,000 vehicles and avert £1M+ warranty exposure.</li>
+          <li>Drove suspension component localization to cut BoM complexity and deliver £0.85M annual savings while preserving customer-grade performance.</li>
+          <li>Facilitated Agile ceremonies (PI planning, backlog grooming, sprint planning, retrospectives) → improved release quality, achieving 4.5/5 CSAT.</li>
+          <li>Strengthened stakeholder collaboration across 5+ global production facilities, reducing project delays and scope creep by 30%.</li>
+          <li>Negotiated supplier contracts for new equipment → 20% cost reduction (£10K savings).</li>
+        </ul>
+
+        <div class="exp-role">April 2024 – Sept 2024 &bull; Product Manager — Alt Uni-Capstone Project, Remote</div>
+        <p style="color:var(--text-secondary); font-size:15px; margin-bottom:0.5rem;">As a PM, designed digital-first retail lending products (credit cards + gold loans) for Piramal Finance to drive AUM growth across Tier 2/3 segments.</p>
+        <ul class="nlist">
+          <li><strong>Growth Strategy:</strong> Defined a product roadmap to scale Retail AUM from ₹65 Cr to ₹90 Cr by targeting Tier 2/3 cities; launched a digital credit card journey for first-time borrowers to capture a 20% market CAGR.</li>
+          <li><strong>UX:</strong> Streamlined the Gold Loan journey by building an app-based "Doorstep &amp; Branch" booking flow; simplified document uploads for rural segments to reduce friction by 5% and move users from the unorganized market to formal credit.</li>
+          <li><strong>GTM &amp; Execution:</strong> Led a GTM plan covering the full user lifecycle (Awareness to Retention); optimized digital application funnels to leverage 11.64% sectoral growth and diversify the retail portfolio mix.</li>
+        </ul>
+
+        <div class="exp-role">Jul 2018 – Oct 2021 &bull; Project Engineer — Ushin, India</div>
+        <p style="color:var(--text-secondary); font-size:15px; margin-bottom:0.5rem;">As a project engineer, owned development of Tier-1 systems for OEM programs, aligning requirements, DFMEA, and suppliers to enable on-time SOP and platform reuse.</p>
+        <ul class="nlist">
+          <li>Delivered flush door handles for EU OEMs → increased revenue 10%, showcased at Tokyo Motor Show 2019.</li>
+          <li>Designed backup mechanism to improve actuator lifecycle (250K cycles) → cut warranty costs by 25%.</li>
+          <li>Managed end-to-end delivery of e-Access side door actuator for JP OEMs, validated under extreme conditions (-40°C).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CASE STUDIES -->
+  <div id="case-studies">
+    <div class="toggle open">
+      <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="toggle-arrow">▶</span>
+        <span class="h1" style="margin:0;">Product Case Studies</span>
+      </div>
+      <div id="case-studies-body" class="toggle-body">
+        <hr class="divider">
+
+    <!-- CARD GRID -->
+    <div class="cs-grid">
+
+      <!-- Card 1: Product Strategy -->
+      <div class="cs-card" onclick="toggleDetail('cs-strategy')">
+        <div class="cs-card-top">
+          <div class="cs-icon-wrap"><span class="cs-icon">🗺️</span></div>
+          <span class="cs-tag">Product Strategy</span>
+          <span style="font-size:10px; font-weight:700; letter-spacing:0.07em; background:#fff3e0; color:#e65100; border:1px solid #ffcc80; border-radius:4px; padding:2px 8px;">FINTECH</span>
+          <span class="cs-arrow">↗</span>
+        </div>
+        <div class="cs-card-title">Retail Lending Products</div>
+        <div class="cs-card-desc">Designed digital-first credit card and gold loan products for Piramal Finance targeting Tier 2/3 segments to drive AUM growth.</div>
+        <div class="cs-badges">
+          <span class="cs-badge">₹65→₹90 Cr AUM</span>
+          <span class="cs-badge">20% CAGR</span>
+          <span class="cs-badge">11.64% Market Growth</span>
+        </div>
+        <div style="margin-top:0.85rem; padding-top:0.75rem; border-top:1px dashed var(--border); display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:11.5px; color:var(--text-secondary); font-weight:500;">Click for more details</span>
+          <span style="font-size:11px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2px 10px; color:var(--text-secondary);">↗ View case study</span>
+        </div>
+      </div>
+
+      <!-- Card 2: User Research &amp; Product Roadmapping -->
+      <div class="cs-card" onclick="toggleDetail('cs-learify')">
+        <div class="cs-card-top">
+          <div class="cs-icon-wrap"><span class="cs-icon">📚</span></div>
+          <span class="cs-tag">User Research &amp; Product Roadmapping</span>
+          <span style="font-size:10px; font-weight:700; letter-spacing:0.07em; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; border-radius:4px; padding:2px 8px;">EDTECH</span>
+          <span class="cs-arrow">↗</span>
+        </div>
+        <div class="cs-card-title">Learify — Online Learning Platform</div>
+        <div class="cs-card-desc">End-to-end product case study using Design Thinking with 3-phase sprint roadmap.</div>
+        <div class="cs-badges">
+          <span class="cs-badge">₹800/year</span>
+          <span class="cs-badge">Design Thinking</span>
+          <span class="cs-badge">3-Sprint Roadmap</span>
+        </div>
+        <div style="margin-top:0.85rem; padding-top:0.75rem; border-top:1px dashed var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px;">
+          <span style="font-size:11.5px; color:var(--text-secondary); font-weight:500;">Click for more details</span>
+          <span style="font-size:11px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2px 10px; color:var(--text-secondary);">↗ View case study</span>
+        </div>
+      </div>
+
+      <!-- Card 3: PRDs -->
+      <div class="cs-card" onclick="toggleDetail('cs-prd')">
+        <div class="cs-card-top">
+          <div class="cs-icon-wrap"><span class="cs-icon">📝</span></div>
+          <span class="cs-tag">PRDs</span>
+          <span style="font-size:10px; font-weight:700; letter-spacing:0.07em; background:#e3f2fd; color:#1565c0; border:1px solid #90caf9; border-radius:4px; padding:2px 8px;">SAAS</span>
+          <span class="cs-arrow">↗</span>
+        </div>
+        <div class="cs-card-title">Canva — OTP Login Feature</div>
+        <div class="cs-card-desc">PRD for phone-number OTP login to improve Canva sign-up conversion (Omnify Assessment).</div>
+        <div class="cs-badges">
+          <span class="cs-badge">Faster Sign-up</span>
+          <span class="cs-badge">OTP Flow</span>
+          <span class="cs-badge">4-Screen Design</span>
+        </div>
+        <div style="margin-top:0.85rem; padding-top:0.75rem; border-top:1px dashed var(--border); display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:11.5px; color:var(--text-secondary); font-weight:500;">Click for more details</span>
+          <span style="font-size:11px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2px 10px; color:var(--text-secondary);">↗ View case study</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Product Teardown -->
+      <div class="cs-card" onclick="toggleDetail('cs-teardown')">
+        <div class="cs-card-top">
+          <div class="cs-icon-wrap"><span class="cs-icon">🔍</span></div>
+          <span class="cs-tag">Product Teardown</span>
+          <span style="font-size:10px; font-weight:700; letter-spacing:0.07em; background:#f3e5f5; color:#6a1b9a; border:1px solid #ce93d8; border-radius:4px; padding:2px 8px;">DESIGN TECH</span>
+          <span class="cs-arrow">↗</span>
+        </div>
+        <div class="cs-card-title">Moqups — Wireframing Tool</div>
+        <div class="cs-card-desc">Deep-dive teardown of Moqups: UI/UX, competitive benchmark, RICE prioritization and 12-month roadmap.</div>
+        <div class="cs-badges">
+          <span class="cs-badge">RICE Framework</span>
+          <span class="cs-badge">Competitive Analysis</span>
+          <span class="cs-badge">3-Phase Roadmap</span>
+        </div>
+        <div style="margin-top:0.85rem; padding-top:0.75rem; border-top:1px dashed var(--border); display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:11.5px; color:var(--text-secondary); font-weight:500;">Click for more details</span>
+          <span style="font-size:11px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2px 10px; color:var(--text-secondary);">↗ View case study</span>
+        </div>
+
+      </div>
+
+    </div><!-- end cs-grid -->
+
+    <!-- ===== DETAIL PANELS ===== -->
+
+    <!-- DETAIL: Product Strategy -->
+    <div id="cs-strategy" class="cs-detail" style="display:none;">
+      <div class="cs-detail-header">
+        <button class="cs-back" onclick="toggleDetail('cs-strategy')">← Back to Case Studies</button>
+        <div class="cs-detail-tag">Product Strategy</div>
+      </div>
+      <div class="h2" style="margin-top:1rem;">Retail Lending Products — Piramal Finance (Alt Uni Capstone)</div>
+
+      <div class="callout-grid">
+        <div class="callout yellow">
+          <div class="callout-label"><span class="callout-icon">☆</span> North Star</div>
+          <p>Scale Retail AUM: <strong>₹65 Cr → ₹90 Cr by FY28</strong></p>
+          <p>Target: Tier 2/3 cities, first-time borrowers</p>
+        </div>
+        <div class="callout blue">
+          <div class="callout-label"><span class="callout-icon">⚙</span> What I built</div>
+          <p>Two product avenues: Co-branded Credit Cards + Gold Loans</p>
+          <p>Digital customer journeys + GTM across full funnel</p>
+        </div>
+      </div>
+
+      <p><strong>Context:</strong> Piramal Finance (PF) is a retail-led NBFC with ₹65 Cr AUM (55% retail). The goal was to identify two growth avenues — unsecured (credit cards) and secured (gold loans) — and design digital-first products targeting underserved Bharat segments to reach ₹90 Cr AUM.</p>
+
+      <div class="h3">Avenue 1 — Co-branded Credit Cards (Unsecured)</div>
+      <p><strong>Market Opportunity:</strong> India's credit card industry grew 11.64% in 9 months (Aug 2023 – May 2024, RBI data). The sector has seen a 20% CAGR over 5 years, yet only 3% of India's population holds a formal credit card — a massive whitespace.</p>
+      <p><strong>Where to play:</strong> Tier 2 &amp; 3 cities (65% of current cards concentrated in Tier 1), self-employed professionals (SMEs, freelancers), and early jobbers aged 18–25. Target income band: ₹2.5–5 Lakhs. Average ticket size: ₹4,000–5,000.</p>
+      <p><strong>Competitive benchmark:</strong> Bajaj Finserv, Tata Capital, and Aditya Birla Capital already offer co-branded cards. 7 of top 10 NBFCs do not — first-mover advantage exists for PF.</p>
+
+      <!-- Credit Card Customer Journey - Phone Wireframes -->
+      <div class="h3">📱 Credit Card — App Customer Journey</div>
+      <div style="overflow-x:auto; padding-bottom:1rem;">
+      <div style="display:flex; gap:12px; min-width:max-content; margin:0.75rem 0 0.5rem; align-items:flex-end;">
+
+        <!-- Phone 1: Login -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:120px; height:210px; background:#1a1a2e; border-radius:16px; border:3px solid #333; position:relative; overflow:hidden; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,0.18);">
+            <div style="background:#111; height:10px; border-radius:0; display:flex; align-items:center; justify-content:center; padding:0 8px;">
+              <div style="width:20px; height:3px; background:#333; border-radius:4px;"></div>
+            </div>
+            <div style="padding:8px 7px;">
+              <div style="font-size:6px; color:#aaa; margin-bottom:4px;">Sign In</div>
+              <div style="font-size:5px; color:#888; margin-bottom:6px;">Verify your details to proceed</div>
+              <div style="display:flex; gap:4px; margin-bottom:5px; border-bottom:1px solid #e97316; padding-bottom:2px;">
+                <span style="font-size:5px; color:#e97316; font-weight:600;">Individual</span>
+                <span style="font-size:5px; color:#888;">Non-Ind</span>
+                <span style="font-size:5px; color:#888;">NRI</span>
+              </div>
+              <div style="background:#222; border-radius:4px; padding:4px 5px; margin-bottom:4px;">
+                <div style="font-size:5px; color:#777; margin-bottom:1px;">Phone number</div>
+                <div style="font-size:6px; color:#ccc; letter-spacing:1px;">XXXXXXXXXX</div>
+              </div>
+              <div style="background:#222; border-radius:4px; padding:4px 5px; margin-bottom:8px;">
+                <div style="font-size:5px; color:#777; margin-bottom:1px;">Date of birth</div>
+                <div style="font-size:6px; color:#ccc;">XX/XX/XXXX</div>
+              </div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center;">
+                <span style="font-size:6px; font-weight:700; color:#fff;">GET OTP</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c0533a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">1</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Login with phone number</div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="font-size:18px; color:#c0533a; margin-bottom:48px; flex-shrink:0;">→</div>
+
+        <!-- Phone 2: OTP -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:120px; height:210px; background:#fff; border-radius:16px; border:3px solid #ddd; position:relative; overflow:hidden; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+            <div style="background:#f5f5f5; height:10px;"></div>
+            <div style="padding:10px 8px; text-align:center;">
+              <div style="font-size:14px; margin-bottom:4px;">🔐</div>
+              <div style="font-size:6.5px; font-weight:700; color:#1a1a2e; margin-bottom:2px;">Verify your OTP</div>
+              <div style="font-size:5px; color:#888; margin-bottom:6px;">Sent to +91 XXXXXX34</div>
+              <div style="font-size:5px; color:#e97316; margin-bottom:8px; text-decoration:underline;">Change</div>
+              <div style="display:flex; gap:3px; justify-content:center; margin-bottom:8px;">
+                <div style="width:14px; height:16px; border:1px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:700; color:#333;">×</div>
+                <div style="width:14px; height:16px; border:1px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:700; color:#333;">×</div>
+                <div style="width:14px; height:16px; border:1px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:700; color:#333;">×</div>
+                <div style="width:14px; height:16px; border:1px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:700; color:#333;">×</div>
+                <div style="width:14px; height:16px; border:1px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:700; color:#333;">×</div>
+                <div style="width:14px; height:16px; border:1px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:700; color:#333;">×</div>
+              </div>
+              <div style="font-size:5px; color:#e97316; margin-bottom:8px; text-align:right;">Resend OTP</div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center;">
+                <span style="font-size:6px; font-weight:700; color:#fff;">SUBMIT</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c0533a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">2</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Enter 6-digit OTP</div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="font-size:18px; color:#c0533a; margin-bottom:48px; flex-shrink:0;">→</div>
+
+        <!-- Phone 3: Home / Card Discovery -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:120px; height:210px; background:#f8f9fa; border-radius:16px; border:3px solid #ddd; overflow:hidden; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+            <div style="background:#1a1a6e; padding:5px 7px; display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:6px; color:#fff; font-weight:700;">≡</span>
+              <div style="background:rgba(255,255,255,0.15); border-radius:6px; padding:2px 6px; flex:1; margin:0 4px;">
+                <span style="font-size:5px; color:rgba(255,255,255,0.6);">Search me</span>
+              </div>
+              <span style="font-size:8px;">🎤</span>
+            </div>
+            <div style="padding:5px 6px;">
+              <div style="background:#1a1a6e; border-radius:6px; padding:5px; margin-bottom:5px;">
+                <div style="font-size:5px; color:#aac; margin-bottom:3px;">Co-brand Credit Card</div>
+                <div style="display:flex; gap:5px; justify-content:space-around;">
+                  <div style="text-align:center;"><div style="font-size:11px;">💳</div><div style="font-size:4px; color:#aac;">Check Offer</div></div>
+                  <div style="text-align:center;"><div style="font-size:11px;">🎁</div><div style="font-size:4px; color:#aac;">Joining Bonus</div></div>
+                  <div style="text-align:center;"><div style="font-size:11px;">⭐</div><div style="font-size:4px; color:#aac;">Benefits</div></div>
+                  <div style="text-align:center;"><div style="font-size:11px;">🏷️</div><div style="font-size:4px; color:#aac;">Offers</div></div>
+                </div>
+              </div>
+              <div style="font-size:5px; color:#555; font-weight:600; margin-bottom:3px;">Bills &amp; Recharge</div>
+              <div style="display:flex; gap:5px; margin-bottom:5px;">
+                <div style="text-align:center;"><div style="font-size:10px;">⚡</div><div style="font-size:4px; color:#888;">Electric</div></div>
+                <div style="text-align:center;"><div style="font-size:10px;">📱</div><div style="font-size:4px; color:#888;">Mobile</div></div>
+                <div style="text-align:center;"><div style="font-size:10px;">📡</div><div style="font-size:4px; color:#888;">DTH</div></div>
+                <div style="text-align:center;"><div style="font-size:10px;">💰</div><div style="font-size:4px; color:#888;">Pay EMI</div></div>
+              </div>
+              <div style="background:#e8f5e9; border-radius:5px; padding:4px; font-size:5px; color:#2e7d32;">Get Instant Pre-approved Loan of ₹20,00,000</div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c0533a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">3</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Home Screen — co-branded cards</div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="font-size:18px; color:#c0533a; margin-bottom:48px; flex-shrink:0;">→</div>
+
+        <!-- Phone 4: Card List -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:120px; height:210px; background:#fff; border-radius:16px; border:3px solid #ddd; overflow:hidden; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+            <div style="background:#1a1a6e; padding:5px 7px;">
+              <span style="font-size:5.5px; color:#aac;">← Co-Brand Credit Card</span>
+            </div>
+            <div style="padding:6px 7px;">
+              <div style="font-size:5px; color:#555; margin-bottom:2px;">RBL Credit Cards &nbsp; DBS Credit Cards</div>
+              <div style="font-size:5.5px; font-weight:600; color:#333; margin-bottom:5px;">Choose from a variety of cards</div>
+              <!-- Card row 1 -->
+              <div style="border:1px solid #eee; border-radius:5px; padding:4px 5px; margin-bottom:3px; display:flex; align-items:center; justify-content:space-between;">
+                <div>
+                  <div style="font-size:5px; font-weight:600; color:#333;">Platinum Plus</div>
+                  <div style="font-size:4px; color:#888;">5X reward points</div>
+                </div>
+                <div style="background:#e97316; border-radius:3px; padding:2px 4px;"><span style="font-size:4.5px; color:#fff; font-weight:700;">Apply</span></div>
+              </div>
+              <!-- Card row 2 -->
+              <div style="border:1px solid #eee; border-radius:5px; padding:4px 5px; margin-bottom:3px; display:flex; align-items:center; justify-content:space-between;">
+                <div>
+                  <div style="font-size:5px; font-weight:600; color:#333;">Binge Plus Card</div>
+                  <div style="font-size:4px; color:#888;">Welcome bonus 2,000 pts</div>
+                </div>
+                <div style="background:#e97316; border-radius:3px; padding:2px 4px;"><span style="font-size:4.5px; color:#fff; font-weight:700;">Apply</span></div>
+              </div>
+              <!-- Card row 3 -->
+              <div style="border:1px solid #eee; border-radius:5px; padding:4px 5px; display:flex; align-items:center; justify-content:space-between;">
+                <div>
+                  <div style="font-size:5px; font-weight:600; color:#333;">World Select Card</div>
+                  <div style="font-size:4px; color:#888;">2,000 cash reward pts</div>
+                </div>
+                <div style="background:#e97316; border-radius:3px; padding:2px 4px;"><span style="font-size:4.5px; color:#fff; font-weight:700;">Apply</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c0533a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">5</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Choose card → Apply Now</div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="font-size:18px; color:#c0533a; margin-bottom:48px; flex-shrink:0;">→</div>
+
+        <!-- Phone 5: Card Detail / Get It Now -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:120px; height:210px; background:#fff; border-radius:16px; border:3px solid #ddd; overflow:hidden; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+            <div style="background:#1a1a6e; padding:5px 7px;">
+              <span style="font-size:5.5px; color:#aac;">← Co-brand Credit Card</span>
+            </div>
+            <div style="padding:6px 7px; text-align:center;">
+              <div style="font-size:5.5px; color:#555; margin-bottom:1px;">Hello Manish,</div>
+              <div style="font-size:4.5px; color:#888; margin-bottom:5px;">Credit limit up to Rs. 1,00,000</div>
+              <!-- Card visual -->
+              <div style="background:linear-gradient(135deg,#1a1a6e,#3a3aae); border-radius:6px; padding:6px; margin-bottom:5px;">
+                <div style="font-size:4px; color:#aac; text-align:left; font-weight:600;">BAJAJ FINSERV</div>
+                <div style="font-size:5.5px; color:#fff; letter-spacing:1px; margin:3px 0; text-align:left;">5356 1100 1234 5678</div>
+                <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                  <span style="font-size:4px; color:#aac;">ANSHUL SHARMA</span>
+                  <span style="font-size:5px;">💳</span>
+                </div>
+              </div>
+              <div style="font-size:4.5px; color:#e97316; margin-bottom:4px; text-decoration:underline;">View all cards</div>
+              <div style="text-align:left; font-size:4px; color:#555; line-height:1.5; margin-bottom:5px;">
+                ✓ Welcome gift of 1,000 reward pts<br>
+                ✓ Get 8X points on every Rs.400<br>
+                ✓ 2,500 points on spends crossing Rs.1,00,000
+              </div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center;">
+                <span style="font-size:6px; font-weight:700; color:#fff;">GET IT NOW</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c0533a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">6</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Card detail → Get it Now</div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="font-size:18px; color:#c0533a; margin-bottom:48px; flex-shrink:0;">→</div>
+
+        <!-- Phone 6: Personal Details -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:120px; height:210px; background:#fff; border-radius:16px; border:3px solid #ddd; overflow:hidden; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+            <div style="background:#1a1a6e; padding:5px 7px;">
+              <span style="font-size:5.5px; color:#aac;">← Co-brand Credit Card</span>
+            </div>
+            <div style="padding:6px 7px;">
+              <div style="font-size:5.5px; color:#555; margin-bottom:1px;">Hello,</div>
+              <div style="font-size:4.5px; color:#888; margin-bottom:5px;">Share your details to complete application</div>
+              <div style="font-size:5px; font-weight:600; color:#333; margin-bottom:4px;">Personal Details</div>
+              <div style="border-bottom:1px solid #eee; padding-bottom:4px; margin-bottom:4px;">
+                <div style="font-size:4px; color:#888;">Name*</div>
+                <div style="font-size:5px; color:#aaa; letter-spacing:1px;">XXX XXXX XXXXXX</div>
+              </div>
+              <div style="border-bottom:1px solid #eee; padding-bottom:4px; margin-bottom:4px;">
+                <div style="font-size:4px; color:#888;">Date of Birth*</div>
+                <div style="font-size:5px; color:#aaa;">XX/XX/XXXX</div>
+              </div>
+              <div style="border-bottom:1px solid #eee; padding-bottom:4px; margin-bottom:6px;">
+                <div style="font-size:4px; color:#888;">PAN*</div>
+                <div style="font-size:5px; color:#aaa; letter-spacing:1px;">XXXXXXX</div>
+              </div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center;">
+                <span style="font-size:6px; font-weight:700; color:#fff;">PROCEED</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c0533a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">7–9</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">PAN, DOB, Gender details</div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="font-size:18px; color:#c0533a; margin-bottom:48px; flex-shrink:0;">→</div>
+
+        <!-- Phone 7: Occupation/Address -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:120px; height:210px; background:#fff; border-radius:16px; border:3px solid #ddd; overflow:hidden; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+            <div style="background:#1a1a6e; padding:5px 7px;">
+              <span style="font-size:5.5px; color:#aac;">← Co-brand Credit Card</span>
+            </div>
+            <div style="padding:6px 7px;">
+              <div style="font-size:5.5px; font-weight:600; color:#333; margin-bottom:1px;">Occupation Details</div>
+              <div style="font-size:4.5px; color:#888; margin-bottom:5px;">Please help us with your occupation details</div>
+              <div style="border:1px solid #ddd; border-radius:4px; padding:3px 5px; margin-bottom:4px; display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:5px; color:#aaa;">Occupation Type*</span><span style="font-size:8px; color:#e97316;">∨</span>
+              </div>
+              <div style="border-bottom:1px solid #eee; padding-bottom:3px; margin-bottom:3px;">
+                <div style="font-size:4px; color:#888;">Company Name*</div>
+                <div style="font-size:5px; color:#aaa; letter-spacing:0.5px;">XXXXX XXX</div>
+              </div>
+              <div style="border-bottom:1px solid #eee; padding-bottom:3px; margin-bottom:6px;">
+                <div style="font-size:4px; color:#888;">Designation*</div>
+                <div style="font-size:5px; color:#aaa;">XXXXX</div>
+              </div>
+              <div style="background:#f0f4ff; border-radius:4px; padding:4px; margin-bottom:6px;">
+                <div style="font-size:4px; color:#555; font-weight:600; margin-bottom:2px;">Why do we need this?</div>
+                <div style="font-size:4px; color:#777; line-height:1.4;">To ascertain your employment status and process your application</div>
+              </div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center;">
+                <span style="font-size:6px; font-weight:700; color:#fff;">PROCEED</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c0533a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">10–13</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Occupation &amp; address details</div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="font-size:18px; color:#c0533a; margin-bottom:48px; flex-shrink:0;">→</div>
+
+        <!-- Phone 8: Thank You -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:120px; height:210px; background:#1a1a6e; border-radius:16px; border:3px solid #333; overflow:hidden; flex-shrink:0; box-shadow:0 4px 16px rgba(0,0,0,0.2);">
+            <div style="background:#111; padding:5px 7px;">
+              <span style="font-size:5.5px; color:#aac;">Co-brand Credit Card</span>
+            </div>
+            <div style="padding:10px 8px; text-align:center;">
+              <div style="width:32px; height:32px; background:#4caf50; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-size:16px;">✓</div>
+              <div style="font-size:7px; font-weight:700; color:#fff; margin-bottom:4px;">Thank You!</div>
+              <div style="font-size:4.5px; color:#aac; line-height:1.5; margin-bottom:8px;">We've successfully received your application. We'll notify you once we receive approval on your credit card application.</div>
+              <div style="font-size:5px; color:#aac; margin-bottom:5px;">Explore other products</div>
+              <div style="display:flex; gap:3px;">
+                <div style="background:rgba(255,255,255,0.1); border-radius:4px; padding:4px; flex:1; font-size:4px; color:#fff; text-align:center;">EMI Card</div>
+                <div style="background:rgba(255,255,255,0.1); border-radius:4px; padding:4px; flex:1; font-size:4px; color:#fff; text-align:center;">Fixed Deposit</div>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#1a7a6e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">14</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">✅ Application submitted!</div>
+        </div>
+
+      </div><!-- end flex -->
+      </div><!-- end scroll wrapper -->
+
+      <!-- GTM Funnel Credit Cards -->
+      <div class="h3">📣 Credit Card — GTM Funnel (9 Stages)</div>
+      <div style="margin:0.75rem 0 1.25rem;">
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">1</span>
+            <span><strong>Awareness</strong> — Targeted digital/print ads, partnerships with retail stores &amp; e-commerce, social media influencers</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">2</span>
+            <span><strong>Interest</strong> — Website &amp; mobile app, financial literacy content, webinars &amp; workshops</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">3</span>
+            <span><strong>Consideration</strong> — Comparison tools, customer testimonials, live chat &amp; call support</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">4</span>
+            <span><strong>Application</strong> — Simplified online form, secure document upload, real-time application tracking</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">5</span>
+            <span><strong>Approval &amp; Issuance</strong> — Quick credit check, SMS/email notification, secure card dispatch</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">6</span>
+            <span><strong>Activation &amp; Onboarding</strong> — Easy activation via app, welcome kit, onboarding tutorials</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">7</span>
+            <span><strong>Usage &amp; Engagement</strong> — Mobile app integration, rewards &amp; offers, monthly spending insights</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">8</span>
+            <span><strong>Customer Service</strong> — 24/7 support, robust dispute &amp; fraud resolution, feedback loop</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#c0533a; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">9</span>
+            <span><strong>Retention &amp; Loyalty</strong> — Tiered loyalty programs, exclusive deals for high-value customers, card upgrades</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h3">Avenue 2 — Gold Loans (Secured)</div>
+      <p><strong>Market Opportunity:</strong> The organised gold loan market has grown at a CAGR of 22.3% (FY19–FY24). NBFCs hold 37% of the organised market. Critically, 65% of India's gold loan market remains unorganised — a massive conversion opportunity.</p>
+      <p><strong>Where to play:</strong> Rural and semi-urban populations currently served by informal lenders (unorganised = 65% of market). Target: farmers, small shopkeepers, street vendors, artisans — income range ₹5,000–₹30,000/month. Average ticket: ₹1.75–5 Lakhs. South India has the highest demand (40%).</p>
+
+      <!-- Gold Loan Customer Journey - Phone Wireframes -->
+      <div class="h3">🌐 Gold Loan — Website Journey</div>
+      <div style="overflow-x:auto; padding-bottom:0.5rem; margin:0.75rem 0 1.25rem;">
+      <div style="display:flex; gap:14px; min-width:max-content; align-items:flex-end;">
+
+        <!-- Step 1: Eligibility Checklist -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:130px; height:195px; background:#fff; border-radius:10px; border:2px solid #ddd; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.09);">
+            <div style="background:#f5f5f5; height:8px;"></div>
+            <div style="padding:8px 9px;">
+              <div style="font-size:5.5px; font-weight:700; color:#333; margin-bottom:6px;">Gold Loan Application</div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <div style="width:8px; height:8px; border-radius:50%; background:#e97316; display:flex; align-items:center; justify-content:center; font-size:4px; color:#fff; flex-shrink:0;">●</div>
+                  <span style="font-size:5px; color:#333; font-weight:600;">Eligibility Check</span>
+                </div>
+                <div style="width:2px; height:8px; background:#eee; margin-left:3px;"></div>
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <div style="width:8px; height:8px; border-radius:50%; border:1.5px solid #ccc; flex-shrink:0;"></div>
+                  <span style="font-size:5px; color:#aaa;">Personal Details</span>
+                </div>
+                <div style="width:2px; height:8px; background:#eee; margin-left:3px;"></div>
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <div style="width:8px; height:8px; border-radius:50%; border:1.5px solid #ccc; flex-shrink:0;"></div>
+                  <span style="font-size:5px; color:#aaa;">Appointment Booking</span>
+                </div>
+                <div style="width:2px; height:8px; background:#eee; margin-left:3px;"></div>
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <div style="width:8px; height:8px; border-radius:50%; border:1.5px solid #ccc; flex-shrink:0;"></div>
+                  <span style="font-size:5px; color:#aaa;">Branch Visit</span>
+                </div>
+                <div style="width:2px; height:8px; background:#eee; margin-left:3px;"></div>
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <div style="width:8px; height:8px; border-radius:50%; border:1.5px solid #ccc; flex-shrink:0;"></div>
+                  <span style="font-size:5px; color:#aaa;">Disbursal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">1</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:120px; line-height:1.3;">Eligibility &amp; personal details</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:48px;">→</div>
+
+        <!-- Step 2: Loan Amount -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:130px; height:195px; background:#5a3a00; border-radius:10px; border:2px solid #7a5200; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.2);">
+            <div style="padding:10px 10px; text-align:center;">
+              <div style="font-size:5px; color:#c9a84c; font-weight:600; margin-bottom:4px;">Enter Amount</div>
+              <div style="font-size:10px; font-weight:700; color:#f5c842; margin-bottom:4px;">Rs. 10,00,000</div>
+              <div style="font-size:4.5px; color:#c9a84c; line-height:1.5; margin-bottom:6px;">Enter a loan amount between Rs. 5,000 and Rs. 2 crore</div>
+              <div style="font-size:4px; color:#a87f30; margin-bottom:8px; font-style:italic;">*Amount is indicative. Final loan based on eligibility.</div>
+              <div style="background:#e97316; border-radius:4px; padding:5px; text-align:center; margin-bottom:6px;">
+                <span style="font-size:6px; font-weight:700; color:#fff;">APPLY</span>
+              </div>
+              <div style="font-size:4px; color:#c9a84c; text-align:center;">By proceeding, you agree to the <span style="color:#e97316;">terms and conditions</span></div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">2</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:120px; line-height:1.3;">Enter loan amount against gold</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:48px;">→</div>
+
+        <!-- Step 3: OTP -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:130px; height:195px; background:#fff; border-radius:10px; border:2px solid #ddd; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.09);">
+            <div style="padding:10px 10px; text-align:center;">
+              <div style="font-size:14px; margin-bottom:4px;">🔐</div>
+              <div style="font-size:6px; font-weight:700; color:#333; margin-bottom:2px;">Enter One Time Password</div>
+              <div style="font-size:4.5px; color:#888; margin-bottom:1px;">An OTP has been sent to</div>
+              <div style="font-size:4.5px; color:#e97316; margin-bottom:8px;">+91 XXXXXX1260 Change</div>
+              <div style="display:flex; gap:4px; justify-content:center; margin-bottom:5px;">
+                <div style="width:16px; height:18px; border:1.5px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#1a1a6e;">2</div>
+                <div style="width:16px; height:18px; border:1.5px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#1a1a6e;">9</div>
+                <div style="width:16px; height:18px; border:1.5px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#1a1a6e;">1</div>
+                <div style="width:16px; height:18px; border:1.5px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#1a1a6e;">3</div>
+                <div style="width:16px; height:18px; border:1.5px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#1a1a6e;">6</div>
+                <div style="width:16px; height:18px; border:1.5px solid #ddd; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#1a1a6e;">8</div>
+              </div>
+              <div style="font-size:4px; color:#e97316; text-align:right; margin-bottom:5px;">Resend OTP 00:49s</div>
+              <div style="background:#e97316; border-radius:4px; padding:5px; text-align:center;">
+                <span style="font-size:6px; font-weight:700; color:#fff;">SUBMIT</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">3</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:120px; line-height:1.3;">OTP verification</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:48px;">→</div>
+
+        <!-- Step 4: Branch Selection -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:130px; height:195px; background:#fff; border-radius:10px; border:2px solid #ddd; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.09);">
+            <div style="padding:8px 9px;">
+              <div style="font-size:5.5px; color:#555; margin-bottom:4px;">Hello there,<br><span style="font-size:4.5px; color:#888;">Please choose the branch from where you wish to get a Gold Loan</span></div>
+              <div style="font-size:5px; font-weight:600; color:#333; margin-bottom:4px;">Select your Nearest Branch</div>
+              <div style="border:1px solid #e97316; border-radius:5px; padding:5px 6px; margin-bottom:5px; display:flex; align-items:flex-start; gap:4px;">
+                <div style="width:8px; height:8px; border-radius:50%; background:#e97316; margin-top:1px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:5px; color:#fff;">●</div>
+                <div>
+                  <div style="font-size:5px; font-weight:600; color:#333;">Bangalore – Hsr Layout</div>
+                  <div style="font-size:4px; color:#888; line-height:1.4;">NO 641 1ST FLOOR MADUBHATHA MFCNDB, HSR LAYOUT, 9TH MAIN, BENGALURU</div>
+                </div>
+              </div>
+              <div style="font-size:4.5px; color:#888; margin-bottom:3px;">Didn't find your choice?</div>
+              <div style="display:flex; gap:3px; margin-bottom:6px;">
+                <div style="border:1px solid #ddd; border-radius:4px; padding:3px 4px; flex:1; font-size:4px; color:#aaa;">Select State</div>
+                <div style="border:1px solid #ddd; border-radius:4px; padding:3px 4px; flex:1; font-size:4px; color:#aaa;">Select City/Branch</div>
+              </div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center;">
+                <span style="font-size:5.5px; font-weight:700; color:#fff;">PROCEED</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">4</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:120px; line-height:1.3;">Select nearest branch</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:48px;">→</div>
+
+        <!-- Step 5: Loan Sanctioned -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:130px; height:195px; background:#3a2800; border-radius:10px; border:2px solid #6a4800; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.2);">
+            <div style="padding:8px 9px;">
+              <div style="display:flex; justify-content:space-between; font-size:4.5px; color:#c9a84c; margin-bottom:5px; border-bottom:1px solid #5a4000; padding-bottom:3px;">
+                <span>Gold Weight</span><span>Loan Amount</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <div style="background:#5a3a00; border-radius:4px; padding:4px 6px; text-align:center;">
+                  <div style="font-size:8px; font-weight:700; color:#f5c842;">202 gm</div>
+                </div>
+                <div style="background:#5a3a00; border-radius:4px; padding:4px 6px; text-align:center;">
+                  <div style="font-size:7px; font-weight:700; color:#f5c842;">Rs. 10,00,000</div>
+                </div>
+              </div>
+              <div style="font-size:4.5px; color:#c9a84c; margin-bottom:4px; line-height:1.5;">✓ Loan amount based on weight &amp; purity of gold<br>✓ Multiple repayment options available</div>
+              <div style="border:1px solid #6a4800; border-radius:4px; padding:4px; margin-bottom:5px;">
+                <div style="display:flex; justify-content:space-between; font-size:4.5px; color:#c9a84c;">
+                  <span>Tenure</span><span>Rate of Interest</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:6px; font-weight:700; color:#f5c842; margin-top:1px;">
+                  <span>18 months</span><span>starting 9.9% pa</span>
+                </div>
+              </div>
+              <div style="display:flex; gap:3px;">
+                <div style="border:1px solid #c9a84c; border-radius:4px; padding:4px; flex:1; text-align:center;"><span style="font-size:5px; color:#c9a84c;">SAVE FOR LATER</span></div>
+                <div style="background:#e97316; border-radius:4px; padding:4px; flex:1; text-align:center;"><span style="font-size:5px; font-weight:700; color:#fff;">APPLY NOW</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#1a7a6e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">5</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:120px; line-height:1.3;">✅ Loan sanctioned against gold</div>
+        </div>
+
+      </div></div><!-- end website journey -->
+
+      <div class="h3">📱 Gold Loan — App Journey (Doorstep &amp; Branch Flow)</div>
+      <div style="overflow-x:auto; padding-bottom:0.5rem; margin:0.75rem 0 1.25rem;">
+      <div style="display:flex; gap:12px; min-width:max-content; align-items:flex-end;">
+
+        <!-- Phone 1: Home Screen -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:118px; height:215px; background:#1a1200; border-radius:18px; border:3px solid #333; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+            <div style="background:#111; height:9px; display:flex; align-items:center; justify-content:center;"><div style="width:18px; height:2px; background:#333; border-radius:4px;"></div></div>
+            <div style="background:#2a1e00; padding:4px 6px; display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:4.5px; color:#f5c842;">+91 9922185971</span>
+              <span style="font-size:4.5px; color:#f5c842;">☎ Call Us</span>
+            </div>
+            <div style="padding:5px 6px;">
+              <div style="background:linear-gradient(135deg,#e97316,#c47f17); border-radius:6px; padding:6px; margin-bottom:5px; text-align:center;">
+                <div style="font-size:5px; font-weight:700; color:#fff;">STAY HOME</div>
+                <div style="font-size:4.5px; color:#ffe; margin-bottom:2px;">&amp; GET</div>
+                <div style="font-size:6px; font-weight:700; color:#fff;">GOLD LOAN AT HOME</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:4px; background:#2a1e00; border-radius:5px; padding:4px 5px; margin-bottom:3px;">
+                <span style="font-size:9px;">🥇</span>
+                <span style="font-size:5px; color:#f5c842; font-weight:600;">Get a New Gold Loan</span>
+                <span style="font-size:8px; color:#c47f17; margin-left:auto;">›</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:4px; background:#2a1e00; border-radius:5px; padding:4px 5px; margin-bottom:5px;">
+                <span style="font-size:9px;">🔄</span>
+                <span style="font-size:5px; color:#f5c842; font-weight:600;">Loan Repayment</span>
+                <span style="font-size:8px; color:#c47f17; margin-left:auto;">›</span>
+              </div>
+              <div style="font-size:4px; color:#c9a84c; margin-bottom:2px;">Landing Partner</div>
+              <div style="display:flex; gap:3px; justify-content:center;">
+                <div style="background:#1a4a8a; border-radius:3px; padding:2px 4px; font-size:4px; color:#fff;">CSB Bank</div>
+                <div style="background:#c41e3a; border-radius:3px; padding:2px 4px; font-size:4px; color:#fff;">Federal Bank</div>
+              </div>
+            </div>
+            <!-- Nav bar -->
+            <div style="position:absolute; bottom:0; left:0; right:0; background:#111; padding:4px; display:flex; justify-content:space-around;">
+              <span style="font-size:10px; opacity:0.7;">🏠</span>
+              <span style="font-size:10px; opacity:0.4;">🥇</span>
+              <span style="font-size:10px; opacity:0.4;">💎</span>
+              <span style="font-size:10px; opacity:0.4;">👤</span>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">1</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Home Screen — select New Gold Loan</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:54px;">→</div>
+
+        <!-- Phone 2: Scheme Selection -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:118px; height:215px; background:#1a1200; border-radius:18px; border:3px solid #333; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+            <div style="background:#111; height:9px; display:flex; align-items:center; justify-content:center;"><div style="width:18px; height:2px; background:#333; border-radius:4px;"></div></div>
+            <div style="background:#2a1e00; padding:4px 6px; display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:4.5px; color:#f5c842;">+91 9922185971</span>
+              <span style="font-size:4.5px; color:#f5c842;">☎ Call Us</span>
+            </div>
+            <div style="padding:5px 6px; text-align:center;">
+              <div style="font-size:9px; margin-bottom:2px;">🥇</div>
+              <div style="font-size:5.5px; font-weight:700; color:#f5c842; margin-bottom:1px;">Gold Loan</div>
+              <div style="font-size:4.5px; color:#c9a84c; margin-bottom:6px;">Our Gold Loan Schemes</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px;">
+                <div style="background:#e97316; border-radius:5px; padding:5px 4px; text-align:center;">
+                  <div style="font-size:4px; color:#fff;">Below</div>
+                  <div style="font-size:6px; font-weight:700; color:#fff;">₹2 Lakhs</div>
+                  <div style="font-size:4px; color:#ffe;">STARTING AT 1%</div>
+                </div>
+                <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:5px; padding:5px 4px; text-align:center;">
+                  <div style="font-size:4px; color:#c9a84c;">Between</div>
+                  <div style="font-size:6px; font-weight:700; color:#f5c842;">₹4 Lakhs</div>
+                  <div style="font-size:4px; color:#c9a84c;">STARTING AT 1.15%</div>
+                </div>
+                <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:5px; padding:5px 4px; text-align:center;">
+                  <div style="font-size:4px; color:#c9a84c;">Above</div>
+                  <div style="font-size:6px; font-weight:700; color:#f5c842;">₹5 Lakhs</div>
+                  <div style="font-size:4px; color:#c9a84c;">STARTING AT 0.85%</div>
+                </div>
+                <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:5px; padding:5px 4px; text-align:center;">
+                  <div style="font-size:4px; color:#c9a84c;">Max</div>
+                  <div style="font-size:6px; font-weight:700; color:#f5c842;">₹8 Lakhs</div>
+                  <div style="font-size:4px; color:#c9a84c;">STARTING AT 0.50%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">2–3</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Browse gold loan schemes</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:54px;">→</div>
+
+        <!-- Phone 3: Enter Loan Amount -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:118px; height:215px; background:#1a1200; border-radius:18px; border:3px solid #333; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+            <div style="background:#111; height:9px;"></div>
+            <div style="background:#2a1e00; padding:4px 6px; display:flex; justify-content:space-between;"><span style="font-size:4.5px; color:#f5c842;">← New Gold Loans</span><span style="font-size:4.5px; color:#f5c842;">☎</span></div>
+            <!-- Progress bar -->
+            <div style="background:#2a1e00; padding:5px 6px;">
+              <div style="display:flex; justify-content:space-between; font-size:4px; color:#c9a84c; margin-bottom:3px;">
+                <span style="color:#e97316; font-weight:600;">Loan Details</span><span>Date &amp; Time</span><span>Address</span>
+              </div>
+              <div style="height:2px; background:#333; border-radius:2px;"><div style="width:33%; height:100%; background:#e97316; border-radius:2px;"></div></div>
+            </div>
+            <div style="padding:6px 8px;">
+              <div style="font-size:4.5px; color:#c9a84c; margin-bottom:5px;">Approximate Loan Amount You Required</div>
+              <div style="background:#2a1e00; border:1.5px solid #e97316; border-radius:5px; padding:5px 7px; margin-bottom:8px; font-size:7px; font-weight:700; color:#f5c842; text-align:center;">200000</div>
+              <div style="background:#e97316; border-radius:5px; padding:5px; text-align:center;">
+                <span style="font-size:5.5px; font-weight:700; color:#fff;">Continue</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">4</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Enter loan amount required</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:54px;">→</div>
+
+        <!-- Phone 4: Pin Code -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:118px; height:215px; background:#1a1200; border-radius:18px; border:3px solid #333; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+            <div style="background:#111; height:9px;"></div>
+            <div style="background:#2a1e00; padding:4px 6px; display:flex; justify-content:space-between;"><span style="font-size:4.5px; color:#f5c842;">← New Gold Loans</span><span style="font-size:4.5px; color:#f5c842;">☎</span></div>
+            <div style="background:#2a1e00; padding:4px 6px; border-bottom:1px solid #3a2800;">
+              <div style="display:flex; justify-content:space-between; font-size:4px; color:#c9a84c; margin-bottom:2px;"><span style="color:#e97316; font-weight:600;">Loan Details</span><span>Date &amp; Time</span><span>Address</span></div>
+              <div style="height:2px; background:#333;"><div style="width:33%; height:100%; background:#e97316;"></div></div>
+            </div>
+            <div style="padding:5px 7px;">
+              <div style="font-size:4.5px; color:#c9a84c; margin-bottom:4px;">Enter PIN Code</div>
+              <div style="font-size:4px; color:#888; margin-bottom:4px;">Enter your PIN code to check availability of doorstep service</div>
+              <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:5px; padding:4px 6px; margin-bottom:5px; font-size:6.5px; color:#f5c842;">122001</div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center; margin-bottom:5px;">
+                <span style="font-size:5.5px; font-weight:700; color:#fff;">Continue</span>
+              </div>
+              <!-- Keypad -->
+              <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
+                <div style="background:#2a1e00; border-radius:3px; padding:3px; text-align:center; font-size:6px; color:#f5c842;">1</div>
+                <div style="background:#2a1e00; border-radius:3px; padding:3px; text-align:center; font-size:6px; color:#f5c842;">2</div>
+                <div style="background:#2a1e00; border-radius:3px; padding:3px; text-align:center; font-size:6px; color:#f5c842;">3</div>
+                <div style="background:#2a1e00; border-radius:3px; padding:3px; text-align:center; font-size:6px; color:#f5c842;">4</div>
+                <div style="background:#2a1e00; border-radius:3px; padding:3px; text-align:center; font-size:6px; color:#f5c842;">5</div>
+                <div style="background:#2a1e00; border-radius:3px; padding:3px; text-align:center; font-size:6px; color:#f5c842;">6</div>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">5–6</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Enter PIN code for doorstep service</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:54px;">→</div>
+
+        <!-- Phone 5: Date & Time + Address -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:118px; height:215px; background:#1a1200; border-radius:18px; border:3px solid #333; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+            <div style="background:#111; height:9px;"></div>
+            <div style="background:#2a1e00; padding:4px 6px;"><span style="font-size:4.5px; color:#f5c842;">← New Gold Loans</span></div>
+            <div style="background:#2a1e00; padding:3px 6px; border-bottom:1px solid #3a2800;">
+              <div style="display:flex; justify-content:space-between; font-size:4px; color:#c9a84c;"><span>Loan Details ✓</span><span style="color:#e97316; font-weight:600;">Date &amp; Time</span><span>Address</span></div>
+            </div>
+            <div style="padding:5px 7px;">
+              <div style="font-size:4.5px; color:#c9a84c; margin-bottom:1px;">₹ 200000 Lakhs ✓</div>
+              <div style="display:flex; gap:4px; margin-bottom:5px;">
+                <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:4px; padding:3px 4px; flex:1;">
+                  <div style="font-size:4px; color:#c9a84c;">Select Date</div>
+                  <div style="font-size:5px; color:#f5c842;">01/12/2021 📅</div>
+                </div>
+                <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:4px; padding:3px 4px; flex:1;">
+                  <div style="font-size:4px; color:#c9a84c;">Select Time</div>
+                  <div style="font-size:5px; color:#f5c842;">09:30 AM ⏰</div>
+                </div>
+              </div>
+              <div style="font-size:4.5px; color:#c9a84c; margin-bottom:3px;">Add New Address</div>
+              <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:4px; padding:3px 5px; margin-bottom:2px; font-size:4.5px; color:#888;">Name</div>
+              <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:4px; padding:3px 5px; margin-bottom:2px; font-size:4.5px; color:#888;">Address Line 1</div>
+              <div style="background:#2a1e00; border:1px solid #6a4800; border-radius:4px; padding:3px 5px; margin-bottom:4px; font-size:4.5px; color:#888;">PIN Code</div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center;">
+                <span style="font-size:5.5px; font-weight:700; color:#fff;">Save Address</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#c47f17; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">7–9</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">Date, time &amp; address details</div>
+        </div>
+
+        <div style="font-size:18px; color:#c47f17; margin-bottom:54px;">→</div>
+
+        <!-- Phone 6: Review & Request ID -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="width:118px; height:215px; background:#1a1200; border-radius:18px; border:3px solid #333; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+            <div style="background:#111; height:9px;"></div>
+            <div style="background:#2a1e00; padding:4px 6px;"><span style="font-size:4.5px; color:#f5c842;">← New Gold Loans</span></div>
+            <div style="padding:6px 8px;">
+              <div style="background:#2a1e00; border:1px solid #e97316; border-radius:5px; padding:5px; margin-bottom:5px; text-align:center;">
+                <div style="font-size:6px; font-weight:700; color:#f5c842; margin-bottom:1px;">Request ID: 6062</div>
+                <div style="font-size:4.5px; color:#c9a84c;">We will contact you soon to reconfirm the appointment.</div>
+                <div style="font-size:12px; margin-top:2px;">👍</div>
+              </div>
+              <div style="font-size:4.5px; color:#c9a84c; margin-bottom:3px;">Approximate Loan Amount</div>
+              <div style="font-size:6px; font-weight:700; color:#f5c842; margin-bottom:4px;">₹ 200000 Lakhs</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px; font-size:4px; color:#c9a84c; margin-bottom:6px;">
+                <div><div style="color:#888;">Date &amp; Time</div><div style="color:#f5c842;">01/12/2021 09:30AM</div></div>
+                <div><div style="color:#888;">Address</div><div style="color:#f5c842; font-size:3.5px;">C102 Ashoke, 345, Arjun Nagar, Gurgaon 122001</div></div>
+              </div>
+              <div style="background:#e97316; border-radius:4px; padding:4px; text-align:center;">
+                <span style="font-size:5.5px; font-weight:700; color:#fff;">Go Back To Home</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:22px; height:22px; background:#1a7a6e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;">10–11</div>
+          <div style="font-size:10px; color:var(--text-secondary); text-align:center; width:110px; line-height:1.3;">✅ Request ID generated</div>
+        </div>
+
+      </div></div><!-- end gold loan app journey -->
+
+      <!-- GTM Funnel Gold Loans -->
+      <div class="h3">📣 Gold Loan — GTM Funnel (9 Stages)</div>
+      <div style="margin:0.75rem 0 1.25rem;">
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">1</span>
+            <span><strong>Awareness</strong> — Digital marketing, TV/radio ads, community outreach, jewellery store partnerships</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">2</span>
+            <span><strong>Interest</strong> — Financial literacy seminars, informational content on gold loan benefits &amp; rates</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">3</span>
+            <span><strong>Consideration</strong> — Online loan calculators, competitor comparison charts, free advisory services</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">4</span>
+            <span><strong>Application</strong> — Minimal documentation, branch visits or online pre-approval</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">5</span>
+            <span><strong>Appraisal &amp; Approval</strong> — Transparent gold appraisal, swift approval (same day), customer comms</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">6</span>
+            <span><strong>Disbursement</strong> — Instant disbursal via bank transfer, cash, or demand draft</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">7</span>
+            <span><strong>Repayment &amp; Management</strong> — EMI &amp; bullet repayment options, digital loan management app, payment reminders</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">8</span>
+            <span><strong>Customer Service</strong> — Dedicated helpline, proactive comms on market trends &amp; gold valuation</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5;">
+            <span style="background:#2383e2; color:#fff; border-radius:100px; font-size:11px; font-weight:700; padding:2px 8px; flex-shrink:0; margin-top:2px;">9</span>
+            <span><strong>Retention</strong> — Loyalty benefits &amp; interest rate reductions for repeat customers, top-up loan simplification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-grid" style="margin-top:1rem;">
+        <div class="callout yellow">
+          <div class="callout-label"><span class="callout-icon">◎</span> Key Outcomes</div>
+          <p>Roadmap to scale AUM ₹65 Cr → ₹90 Cr</p>
+          <p>5% friction reduction in rural onboarding</p>
+          <p>11.64% credit card market growth leveraged</p>
+        </div>
+        <div class="callout blue">
+          <div class="callout-label"><span class="callout-icon">◈</span> My Role</div>
+          <p>Product strategy · Market research · Customer journey design · GTM planning · Competitive analysis</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL: Learify -->
+    <div id="cs-learify" class="cs-detail" style="display:none;">
+      <div class="cs-detail-header">
+        <button class="cs-back" onclick="toggleDetail('cs-learify')">← Back to Case Studies</button>
+        <div class="cs-detail-tag">User Research &amp; Product Roadmapping</div>
+      </div>
+      <div class="h2" style="margin-top:1rem;">Learify — Online Learning Platform (Product Case Study)</div>
+
+      <div class="callout-grid">
+        <div class="callout yellow">
+          <div class="callout-label"><span class="callout-icon">☆</span> North star</div>
+          <p>India's most accessible, affordable &amp; community-driven learning platform</p>
+          <p>₹800/year = 4 cups of coffee</p>
+        </div>
+        <div class="callout blue">
+          <div class="callout-label"><span class="callout-icon">⚙</span> What I built</div>
+          <p>End-to-end product case study using Design Thinking</p>
+          <p>3-phase sprint roadmap (Init → Growth → Maturity)</p>
+        </div>
+      </div>
+
+      <p><strong>Problem Statement:</strong> Limited access to quality educational resources, high cost of traditional education, and lack of flexibility in learning schedules.</p>
+
+      <div class="h3">Empathize → Research Findings</div>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:0.75rem;">Surveys (20 respondents) + Interviews (2 office colleagues)</p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:0.75rem 0 1rem;">
+        <div style="border:1px solid var(--border); border-left:3px solid #1a7a6e; border-radius:6px; padding:0.85rem 1rem;">
+          <div style="font-size:1.6rem; font-weight:700; color:#1a7a6e; line-height:1;">89%</div>
+          <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Need to update skills every 5 years</div>
+        </div>
+        <div style="border:1px solid var(--border); border-left:3px solid #1a7a6e; border-radius:6px; padding:0.85rem 1rem;">
+          <div style="font-size:1.6rem; font-weight:700; color:#1a7a6e; line-height:1;">78%</div>
+          <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Learning should be rewarding</div>
+        </div>
+        <div style="border:1px solid var(--border); border-left:3px solid #1a7a6e; border-radius:6px; padding:0.85rem 1rem;">
+          <div style="font-size:1.6rem; font-weight:700; color:#1a7a6e; line-height:1;">63%</div>
+          <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Feel demotivated in career journey</div>
+        </div>
+        <div style="border:1px solid var(--border); border-left:3px solid #1a7a6e; border-radius:6px; padding:0.85rem 1rem;">
+          <div style="font-size:1.6rem; font-weight:700; color:#1a7a6e; line-height:1;">56%</div>
+          <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Traditional learning lacks flexibility</div>
+        </div>
+        <div style="border:1px solid var(--border); border-left:3px solid #1a7a6e; border-radius:6px; padding:0.85rem 1rem;">
+          <div style="font-size:1.6rem; font-weight:700; color:#1a7a6e; line-height:1;">100%</div>
+          <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Need guidance from industry experts</div>
+        </div>
+        <div style="border:1px solid var(--border); border-left:3px solid #1a7a6e; border-radius:6px; padding:0.85rem 1rem;">
+          <div style="font-size:1.6rem; font-weight:700; color:#1a7a6e; line-height:1;">89%</div>
+          <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Seek a learning community</div>
+        </div>
+      </div>
+
+      <div class="h3">Define → Value Proposition</div>
+      <p><strong>Competitor Pricing (Monthly):</strong> LinkedIn Learning ₹2,500 · Coursera ₹4,922 · Udemy ₹850 · <strong>Learify ₹67</strong></p>
+      <ul class="nlist">
+        <li>Industry expert-led courses (not just professors)</li>
+        <li>₹800/year subscription — most affordable</li>
+        <li>Learn anytime, anywhere — fully flexible</li>
+        <li>Career buddy &amp; mentorship community</li>
+        <li>Certified courses with IIMs, IITs (Phase 3)</li>
+      </ul>
+
+      <div class="h3">Ideate → Product Roadmap</div>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:0.75rem;">Impact-Effort Matrix → 3 Sprint Phases</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:0.75rem 0 1rem;">
+        <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+          <div style="background:#1a7a6e; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">Sprint 1 — Quick Wins</div>
+          <div style="padding:10px 12px;"><ul class="nlist" style="margin:0;">
+            <li style="font-size:13px;">Full functional app (iOS &amp; Web)</li>
+            <li style="font-size:13px;">Pre-recorded videos (long &amp; short)</li>
+            <li style="font-size:13px;">Course segregation &amp; cataloguing</li>
+            <li style="font-size:13px;">Personalised course recommendations</li>
+          </ul></div>
+        </div>
+        <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+          <div style="background:#2078b4; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">Sprint 2 — Big Projects</div>
+          <div style="padding:10px 12px;"><ul class="nlist" style="margin:0;">
+            <li style="font-size:13px;">Polished UI / UX redesign</li>
+            <li style="font-size:13px;">Subscription plans (6m / 1yr, 2 &amp; 4 screens)</li>
+            <li style="font-size:13px;">Career buddy with peer students</li>
+            <li style="font-size:13px;">Expert career guidance sessions</li>
+          </ul></div>
+        </div>
+        <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+          <div style="background:#7b4ab8; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">Sprint 3 — Maturity</div>
+          <div style="padding:10px 12px;"><ul class="nlist" style="margin:0;">
+            <li style="font-size:13px;">Kindle-style paperless reading</li>
+            <li style="font-size:13px;">Research on missing subject gaps</li>
+            <li style="font-size:13px;">Partnership with IIMs &amp; IITs</li>
+            <li style="font-size:13px;">Certification courses &amp; credentials</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="h3">Prototype → Wireframe Screens</div>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:1.25rem;">Low-fidelity wireframes across two design sets — onboarding &amp; discovery, and learning &amp; progress.</p>
+
+      <!-- ── WIREFRAME 1: Onboarding & Discovery ── -->
+      <div style="margin-bottom:8px; font-size:11px; font-weight:700; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.07em;">Wireframe Design 1 — Onboarding &amp; Discovery</div>
+      <div style="border:1.5px dashed #bbb; border-radius:8px; padding:14px; background:#fafafa; margin-bottom:20px; font-family: 'Courier New', monospace;">
+
+        <!-- Nav bar -->
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <div style="border:1px solid #999; border-radius:4px; width:24px; height:22px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <div style="display:flex; flex-direction:column; gap:3px; padding:2px;">
+              <div style="width:10px; height:1.5px; background:#555;"></div>
+              <div style="width:10px; height:1.5px; background:#555;"></div>
+              <div style="width:10px; height:1.5px; background:#555;"></div>
+            </div>
+          </div>
+          <div style="border:1px solid #999; border-radius:4px; padding:2px 10px; font-size:11px; color:#333;">LMS</div>
+          <div style="flex:1;"></div>
+          <div style="border:1px solid #999; border-radius:4px; padding:2px 10px; font-size:10px; color:#333;">DASHBOARD</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:2px 10px; font-size:10px; color:#333;">Courses</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:2px 10px; font-size:10px; color:#333;">Search</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:2px 10px; font-size:10px; color:#333;">LOGIN</div>
+        </div>
+
+        <!-- Hero banner -->
+        <div style="border:1px solid #999; border-radius:4px; padding:10px 14px; margin-bottom:10px; background:#fff;">
+          <div style="font-size:12px; font-weight:700; color:#222; letter-spacing:0.03em;">GROW YOUR SKILLS &amp; ADVANCE YOUR CAREER WITH LMS</div>
+        </div>
+
+        <!-- Subject grid -->
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">PYTHON</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">AI</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">POWER BI</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">History</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">ENGLISH</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">JAVA</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">SQL</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">EVS</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">MATHS</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">PHYSICS</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">HINDI</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:7px 10px; font-size:10px; color:#333; background:#fff;">Google Analytics</div>
+        </div>
+
+        <div style="text-align:center; font-size:10px; color:#888; margin-top:10px;">Alpana Wireframe : LMS</div>
+      </div>
+
+      <!-- ── WIREFRAME 2: Learning & Progress ── -->
+      <div style="margin-bottom:8px; font-size:11px; font-weight:700; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.07em;">Wireframe Design 2 — Learning &amp; Progress</div>
+      <div style="border:1.5px dashed #bbb; border-radius:8px; padding:14px; background:#fafafa; margin-bottom:1.5rem; font-family: 'Courier New', monospace;">
+
+        <!-- Top nav -->
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <div style="border:1px solid #999; border-radius:4px; padding:2px 10px; font-size:11px; color:#333;">Learnify</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:2px 10px; font-size:10px; color:#666;">🌐 Explore</div>
+          <div style="flex:1; border:1px solid #bbb; border-radius:4px; padding:3px 8px; font-size:10px; color:#aaa; background:#fff;">Search for skills, subjects…</div>
+          <div style="font-size:10px; color:#555; border:1px solid #bbb; border-radius:4px; padding:2px 8px; background:#fff;">🏠 Home</div>
+          <div style="font-size:10px; color:#555; border:1px solid #bbb; border-radius:4px; padding:2px 8px; background:#fff;">📖 My learning</div>
+          <div style="border:1px solid #999; border-radius:4px; padding:2px 10px; font-size:10px; color:#333; background:#fff;">LOGIN</div>
+        </div>
+
+        <!-- Hero carousel placeholder -->
+        <div style="border:1px solid #bbb; border-radius:4px; background:#fff; padding:12px; margin-bottom:10px; display:flex; align-items:center; gap:10px;">
+          <div style="font-size:16px; color:#bbb;">◁</div>
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div style="border:1.5px dashed #ccc; width:70px; height:44px; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+              <div style="width:24px; height:24px; border:1px dashed #bbb; border-radius:2px;"></div>
+            </div>
+            <div style="font-size:10px; color:#bbb;">Hero Carousel Slide 1</div>
+            <div style="display:flex; gap:4px;">
+              <div style="width:7px; height:7px; border-radius:50%; background:#555;"></div>
+              <div style="width:7px; height:7px; border-radius:50%; background:#ccc;"></div>
+              <div style="width:7px; height:7px; border-radius:50%; background:#ccc;"></div>
+              <div style="width:7px; height:7px; border-radius:50%; background:#ccc;"></div>
+            </div>
+          </div>
+          <div style="font-size:16px; color:#bbb;">▷</div>
+        </div>
+
+        <!-- Trending subjects label -->
+        <div style="border:1px solid #555; border-radius:3px; display:inline-block; padding:2px 8px; font-size:10px; font-weight:700; color:#333; background:#fff; margin-bottom:8px;">TRENDING SUBJECTS</div>
+
+        <!-- Trending course cards row -->
+        <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-bottom:10px;">
+          <div style="border:1px solid #bbb; border-radius:4px; background:#fff; height:54px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#aaa;">1</div>
+          <div style="border:1px solid #bbb; border-radius:4px; background:#fff; height:54px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#aaa;">2</div>
+          <div style="border:1px solid #bbb; border-radius:4px; background:#fff; height:54px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#aaa;">3</div>
+          <div style="border:1px solid #bbb; border-radius:4px; background:#fff; height:54px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#aaa;">4</div>
+          <div style="border:1px solid #bbb; border-radius:4px; background:#fff; height:54px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#aaa;">5</div>
+        </div>
+
+        <!-- Course list table -->
+        <div style="border:1px solid #bbb; border-radius:4px; background:#fff; overflow:hidden;">
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:1px solid #e0e0e0;">
+            <div style="padding:5px 10px; font-size:10px; color:#555; border-right:1px solid #e0e0e0;">kotlin</div>
+            <div style="padding:5px 10px; font-size:10px; color:#555; border-right:1px solid #e0e0e0;">Google Analytics</div>
+            <div style="padding:5px 10px; font-size:10px; color:#555;">Python</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:1px solid #e0e0e0;">
+            <div style="padding:5px 10px; font-size:10px; color:#555; border-right:1px solid #e0e0e0;">Java</div>
+            <div style="padding:5px 10px; font-size:10px; color:#555; border-right:1px solid #e0e0e0;">Learn AI</div>
+            <div style="padding:5px 10px; font-size:10px; color:#555;">Product Management</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr;">
+            <div style="padding:5px 10px; font-size:10px; color:#555; border-right:1px solid #e0e0e0;">SQL</div>
+            <div style="padding:5px 10px; font-size:10px; color:#555; border-right:1px solid #e0e0e0;">Leadership</div>
+            <div style="padding:5px 10px; font-size:10px; color:#555;">Design Thinking</div>
+          </div>
+        </div>
+
+        <!-- Chat bubble -->
+        <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+          <div style="border:1px solid #bbb; border-radius:12px 12px 0 12px; padding:4px 10px; font-size:10px; color:#555; background:#fff;">How may I help you?</div>
+        </div>
+      </div>
+
+      <div class="h3">What's Next — Roadmap to Launch</div>
+      <ul class="nlist">
+        <li>Increase survey sample size for pricing direction</li>
+        <li>Launch Learify app &amp; web platform (Sprint 1)</li>
+        <li>Design 3-phase feature roadmap (Init → Growth → Maturity)</li>
+        <li>Validate assumptions with A/B testing &amp; user feedback</li>
+        <li>Onboard career buddy network &amp; industry SMEs</li>
+      </ul>
+
+      <div class="h3">Live Prototype</div>
+      <div style="border:1px solid var(--callout-blue-border); background:var(--callout-blue); border-radius:8px; padding:1rem 1.25rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:0.5rem;">
+        <div>
+          <div style="font-size:14px; font-weight:600; color:var(--text); margin-bottom:3px;">Learify — Interactive Prototype</div>
+          <div style="font-size:13px; color:var(--text-secondary);">Click through the full app flow — onboarding, course discovery, learning &amp; community screens.</div>
+        </div>
+        <a href="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICA8dGl0bGU+TGVhcm5pZnkgLSBPbmxpbmUgTGVhcm5pbmcgUGxhdGZvcm0gUHJvdG90eXBlPC90aXRsZT4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2Nkbi50YWlsd2luZGNzcy5jb20iPjwvc2NyaXB0PgogICAgPHN0eWxlPgogICAgICAgICogeyBtYXJnaW46IDA7IHBhZGRpbmc6IDA7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IH0KICAgICAgICBib2R5IHsgZm9udC1mYW1pbHk6IHN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZjsgfQogICAgPC9zdHlsZT4KPC9oZWFkPgo8Ym9keSBjbGFzcz0iYmctZ3JheS01MCI+CiAgICA8ZGl2IGNsYXNzPSJiZy13aGl0ZSBib3JkZXItYiBib3JkZXItZ3JheS0yMDAgc2hhZG93LXNtIj4KICAgICAgICA8ZGl2IGNsYXNzPSJtYXgtdy03eGwgbXgtYXV0byBweC04IHB5LTQiPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4iPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTYiPgogICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtM3hsIGZvbnQtYm9sZCBiZy1ncmFkaWVudC10by1yIGZyb20taW5kaWdvLTYwMCB0by1wdXJwbGUtNjAwIGJnLWNsaXAtdGV4dCB0ZXh0LXRyYW5zcGFyZW50Ij4KICAgICAgICAgICAgICAgICAgICAgICAgTGVhcm5pZnkKICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiBweC00IHB5LTIgdGV4dC1ncmF5LTcwMCBob3Zlcjp0ZXh0LWluZGlnby02MDAgdHJhbnNpdGlvbi1jb2xvcnMiPgogICAgICAgICAgICAgICAgICAgICAgICA8c3Bhbj7wn5OaPC9zcGFuPgogICAgICAgICAgICAgICAgICAgICAgICA8c3Bhbj5FeHBsb3JlPC9zcGFuPgogICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4LTEgbWF4LXcteGwgbXgtOCI+CiAgICAgICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9InRleHQiIHBsYWNlaG9sZGVyPSJTZWFyY2ggZm9yIHNraWxscywgc3ViamVjdHMsIGNvdXJzZXMuLi4iIGNsYXNzPSJ3LWZ1bGwgcHgtNCBweS0zIGJvcmRlciBib3JkZXItZ3JheS0zMDAgcm91bmRlZC14bCBmb2N1czpvdXRsaW5lLW5vbmUgZm9jdXM6cmluZy0yIGZvY3VzOnJpbmctaW5kaWdvLTUwMCI+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZsZXggaXRlbXMtY2VudGVyIGdhcC02Ij4KICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiB0ZXh0LWdyYXktNzAwIj7wn4+gIEhvbWU8L2J1dHRvbj4KICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiB0ZXh0LWdyYXktNzAwIj7wn5OWIE15IExlYXJuaW5nPC9idXR0b24+CiAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz0icHgtNiBweS0yIGJnLWdyYWRpZW50LXRvLXIgZnJvbS1pbmRpZ28tNjAwIHRvLXB1cnBsZS02MDAgdGV4dC13aGl0ZSByb3VuZGVkLWxnIj5Mb2dpbjwvYnV0dG9uPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgIDwvZGl2PgogICAgPC9kaXY+CgogICAgPGRpdiBjbGFzcz0ibWF4LXctN3hsIG14LWF1dG8gcHgtOCBweS04Ij4KICAgICAgICA8ZGl2IGlkPSJjYXJvdXNlbCIgY2xhc3M9InJlbGF0aXZlIHJvdW5kZWQtMnhsIG92ZXJmbG93LWhpZGRlbiBzaGFkb3ctMnhsIG1iLTEyIGgtOTYgYmctZ3JhZGllbnQtdG8tciBmcm9tLWluZGlnby02MDAgdG8tcHVycGxlLTYwMCI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9ImFic29sdXRlIGluc2V0LTAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgdGV4dC13aGl0ZSI+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LWNlbnRlciBweC04Ij4KICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJpbmxpbmUtYmxvY2sgcHgtNCBweS0xLjUgYmctd2hpdGUvMjAgYmFja2Ryb3AtYmx1ci1zbSByb3VuZGVkLWZ1bGwgdGV4dC1zbSBtYi00Ij5GZWF0dXJlZCBDb3Vyc2U8L2Rpdj4KICAgICAgICAgICAgICAgICAgICA8aDIgY2xhc3M9InRleHQtNnhsIGZvbnQtYm9sZCBtYi00Ij5NYXN0ZXIgUHJvZHVjdCBNYW5hZ2VtZW50PC9oMj4KICAgICAgICAgICAgICAgICAgICA8cCBjbGFzcz0idGV4dC0yeGwgbWItOCI+TGVhcm4gZnJvbSBJbmR1c3RyeSBFeHBlcnRzPC9wPgogICAgICAgICAgICAgICAgICAgIDxidXR0b24gY2xhc3M9InB4LTggcHktNCBiZy13aGl0ZSB0ZXh0LWluZGlnby02MDAgcm91bmRlZC14bCBob3ZlcjpzaGFkb3ctMnhsIHRyYW5zaXRpb24tYWxsIj7ilrYgU3RhcnQgTGVhcm5pbmcgTm93PC9idXR0b24+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9kaXY+CgogICAgICAgIDxkaXYgY2xhc3M9Im1iLTgiPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMyBtYi02Ij4KICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0ZXh0LWluZGlnby02MDAgdGV4dC0zeGwiPvCfk4g8L3NwYW4+CiAgICAgICAgICAgICAgICA8aDMgY2xhc3M9InRleHQtM3hsIGZvbnQtYm9sZCB0ZXh0LWdyYXktOTAwIj5UcmVuZGluZyBTdWJqZWN0czwvaDM+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJncmlkIGdyaWQtY29scy0zIGdhcC02IG1iLTgiPgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iYmctd2hpdGUgcm91bmRlZC14bCBwLTYgYm9yZGVyIGJvcmRlci1ncmF5LTIwMCBob3Zlcjpib3JkZXItaW5kaWdvLTMwMCBob3ZlcjpzaGFkb3ctbGcgdHJhbnNpdGlvbi1hbGwgY3Vyc29yLXBvaW50ZXIiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4iPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtNHhsIj7wn5SiPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC1sZyBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAiPk1hdGhzPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtc20gdGV4dC1ncmF5LTUwMCI+8J+RpSAxMmsrIGxlYXJuZXJzPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0ZXh0LWdyYXktNDAwIj7igLo8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iYmctd2hpdGUgcm91bmRlZC14bCBwLTYgYm9yZGVyIGJvcmRlci1ncmF5LTIwMCBob3Zlcjpib3JkZXItaW5kaWdvLTMwMCBob3ZlcjpzaGFkb3ctbGcgdHJhbnNpdGlvbi1hbGwgY3Vyc29yLXBvaW50ZXIiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4iPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtNHhsIj7wn5OIPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC1sZyBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAiPkdvb2dsZSBBbmFseXRpY3M8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC1zbSB0ZXh0LWdyYXktNTAwIj7wn5GlIDE4aysgbGVhcm5lcnM8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9InRleHQtZ3JheS00MDAiPuKAujwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJiZy13aGl0ZSByb3VuZGVkLXhsIHAtNiBib3JkZXIgYm9yZGVyLWdyYXktMjAwIGhvdmVyOmJvcmRlci1pbmRpZ28tMzAwIGhvdmVyOnNoYWRvdy1sZyB0cmFuc2l0aW9uLWFsbCBjdXJzb3ItcG9pbnRlciI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtNCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC00eGwiPvCfkI08L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LWxnIGZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCI+UHl0aG9uPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtc20gdGV4dC1ncmF5LTUwMCI+8J+RpSAyNWsrIGxlYXJuZXJzPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0ZXh0LWdyYXktNDAwIj7igLo8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iYmctd2hpdGUgcm91bmRlZC14bCBwLTYgYm9yZGVyIGJvcmRlci1ncmF5LTIwMCBob3Zlcjpib3JkZXItaW5kaWdvLTMwMCBob3ZlcjpzaGFkb3ctbGcgdHJhbnNpdGlvbi1hbGwgY3Vyc29yLXBvaW50ZXIiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4iPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtNHhsIj7imJU8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LWxnIGZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCI+SmF2YTwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LXNtIHRleHQtZ3JheS01MDAiPvCfkaUgMTVrKyBsZWFybmVyczwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0idGV4dC1ncmF5LTQwMCI+4oC6PC9zcGFuPgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImJnLXdoaXRlIHJvdW5kZWQteGwgcC02IGJvcmRlciBib3JkZXItZ3JheS0yMDAgaG92ZXI6Ym9yZGVyLWluZGlnby0zMDAgaG92ZXI6c2hhZG93LWxnIHRyYW5zaXRpb24tYWxsIGN1cnNvci1wb2ludGVyIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZsZXggaXRlbXMtY2VudGVyIGdhcC00Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LTR4bCI+8J+kljwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtbGcgZm9udC1zZW1pYm9sZCB0ZXh0LWdyYXktOTAwIj5HZW4gQUk8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC1zbSB0ZXh0LWdyYXktNTAwIj7wn5GlIDIyaysgbGVhcm5lcnM8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9InRleHQtZ3JheS00MDAiPuKAujwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJiZy13aGl0ZSByb3VuZGVkLXhsIHAtNiBib3JkZXIgYm9yZGVyLWdyYXktMjAwIGhvdmVyOmJvcmRlci1pbmRpZ28tMzAwIGhvdmVyOnNoYWRvdy1sZyB0cmFuc2l0aW9uLWFsbCBjdXJzb3ItcG9pbnRlciI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtNCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC00eGwiPvCfk7E8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LWxnIGZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCI+UHJvZHVjdCBNYW5hZ2VtZW50PC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtc20gdGV4dC1ncmF5LTUwMCI+8J+RpSAxMGsrIGxlYXJuZXJzPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0ZXh0LWdyYXktNDAwIj7igLo8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iYmctd2hpdGUgcm91bmRlZC14bCBwLTYgYm9yZGVyIGJvcmRlci1ncmF5LTIwMCBob3Zlcjpib3JkZXItaW5kaWdvLTMwMCBob3ZlcjpzaGFkb3ctbGcgdHJhbnNpdGlvbi1hbGwgY3Vyc29yLXBvaW50ZXIiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4iPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtNHhsIj7wn5K+PC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC1sZyBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAiPlNRTDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LXNtIHRleHQtZ3JheS01MDAiPvCfkaUgMTRrKyBsZWFybmVyczwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0idGV4dC1ncmF5LTQwMCI+4oC6PC9zcGFuPgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImJnLXdoaXRlIHJvdW5kZWQteGwgcC02IGJvcmRlciBib3JkZXItZ3JheS0yMDAgaG92ZXI6Ym9yZGVyLWluZGlnby0zMDAgaG92ZXI6c2hhZG93LWxnIHRyYW5zaXRpb24tYWxsIGN1cnNvci1wb2ludGVyIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZsZXggaXRlbXMtY2VudGVyIGdhcC00Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LTR4bCI+8J+RlDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtbGcgZm9udC1zZW1pYm9sZCB0ZXh0LWdyYXktOTAwIj5MZWFkZXJzaGlwPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtc20gdGV4dC1ncmF5LTUwMCI+8J+RpSA4aysgbGVhcm5lcnM8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9InRleHQtZ3JheS00MDAiPuKAujwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJiZy13aGl0ZSByb3VuZGVkLXhsIHAtNiBib3JkZXIgYm9yZGVyLWdyYXktMjAwIGhvdmVyOmJvcmRlci1pbmRpZ28tMzAwIGhvdmVyOnNoYWRvdy1sZyB0cmFuc2l0aW9uLWFsbCBjdXJzb3ItcG9pbnRlciI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtNCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC00eGwiPvCfkqE8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LWxnIGZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCI+RGVzaWduIFRoaW5raW5nPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtc20gdGV4dC1ncmF5LTUwMCI+8J+RpSAxMWsrIGxlYXJuZXJzPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0ZXh0LWdyYXktNDAwIj7igLo8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgIDwvZGl2PgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJtYi04Ij4KICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuIG1iLTYiPgogICAgICAgICAgICAgICAgPGgzIGNsYXNzPSJ0ZXh0LTN4bCBmb250LWJvbGQgdGV4dC1ncmF5LTkwMCI+UG9wdWxhciBDb3Vyc2VzPC9oMz4KICAgICAgICAgICAgICAgIDxidXR0b24gY2xhc3M9InRleHQtaW5kaWdvLTYwMCBob3Zlcjp0ZXh0LWluZGlnby03MDAiPlZpZXcgQWxsIOKAujwvYnV0dG9uPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0iZ3JpZCBncmlkLWNvbHMtMyBnYXAtNiI+CiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJiZy13aGl0ZSByb3VuZGVkLXhsIG92ZXJmbG93LWhpZGRlbiBib3JkZXIgYm9yZGVyLWdyYXktMjAwIGhvdmVyOnNoYWRvdy14bCB0cmFuc2l0aW9uLWFsbCBjdXJzb3ItcG9pbnRlciI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImJnLXBpbmstNTAwIGgtNDAgcmVsYXRpdmUiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iYWJzb2x1dGUgdG9wLTQgcmlnaHQtNCBweC0zIHB5LTEgYmctd2hpdGUvOTAgcm91bmRlZC1mdWxsIHRleHQtc20iPkFkdmFuY2VkPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJwLTUiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC1zbSB0ZXh0LWluZGlnby02MDAgbWItMiI+TWF0aHM8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoNCBjbGFzcz0idGV4dC1sZyBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAgbWItMyI+QWR2YW5jZWQgTWF0aGVtYXRpY3M8L2g0PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQgdGV4dC1zbSB0ZXh0LWdyYXktNjAwIG1iLTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuPuKtkCA0Ljg8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4+8J+RpSAxMi41azwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3Bhbj7wn5WQIDggd2Vla3M8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxidXR0b24gY2xhc3M9InctZnVsbCBweS0yLjUgYmctZ3JheS0xMDAgaG92ZXI6YmctaW5kaWdvLTYwMCBob3Zlcjp0ZXh0LXdoaXRlIHJvdW5kZWQtbGcgdHJhbnNpdGlvbi1hbGwiPkVucm9sbCBOb3c8L2J1dHRvbj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJiZy13aGl0ZSByb3VuZGVkLXhsIG92ZXJmbG93LWhpZGRlbiBib3JkZXIgYm9yZGVyLWdyYXktMjAwIGhvdmVyOnNoYWRvdy14bCB0cmFuc2l0aW9uLWFsbCBjdXJzb3ItcG9pbnRlciI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImJnLXRlYWwtNTAwIGgtNDAgcmVsYXRpdmUiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iYWJzb2x1dGUgdG9wLTQgcmlnaHQtNCBweC0zIHB5LTEgYmctd2hpdGUvOTAgcm91bmRlZC1mdWxsIHRleHQtc20iPkludGVybWVkaWF0ZTwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0icC01Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRleHQtc20gdGV4dC1pbmRpZ28tNjAwIG1iLTIiPkdvb2dsZSBBbmFseXRpY3M8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoNCBjbGFzcz0idGV4dC1sZyBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAgbWItMyI+R29vZ2xlIEFuYWx5dGljcyBNYXN0ZXJjbGFzczwvaDQ+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtNCB0ZXh0LXNtIHRleHQtZ3JheS02MDAgbWItNCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4+4q2QIDQuOTwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3Bhbj7wn5GlIDE4LjJrPC9zcGFuPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuPvCflZAgNiB3ZWVrczwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz0idy1mdWxsIHB5LTIuNSBiZy1ncmF5LTEwMCBob3ZlcjpiZy1pbmRpZ28tNjAwIGhvdmVyOnRleHQtd2hpdGUgcm91bmRlZC1sZyB0cmFuc2l0aW9uLWFsbCI+RW5yb2xsIE5vdzwvYnV0dG9uPgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImJnLXdoaXRlIHJvdW5kZWQteGwgb3ZlcmZsb3ctaGlkZGVuIGJvcmRlciBib3JkZXItZ3JheS0yMDAgaG92ZXI6c2hhZG93LXhsIHRyYW5zaXRpb24tYWxsIGN1cnNvci1wb2ludGVyIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iYmctYmx1ZS01MDAgaC00MCByZWxhdGl2ZSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJhYnNvbHV0ZSB0b3AtNCByaWdodC00IHB4LTMgcHktMSBiZy13aGl0ZS85MCByb3VuZGVkLWZ1bGwgdGV4dC1zbSI+QmVnaW5uZXI8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InAtNSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZXh0LXNtIHRleHQtaW5kaWdvLTYwMCBtYi0yIj5QeXRob248L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoNCBjbGFzcz0idGV4dC1sZyBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAgbWItMyI+UHl0aG9uIGZvciBEYXRhIFNjaWVuY2U8L2g0PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQgdGV4dC1zbSB0ZXh0LWdyYXktNjAwIG1iLTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuPuKtkCA0Ljc8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4+8J+RpSAyNS4zazwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3Bhbj7wn5WQIDEwIHdlZWtzPC9zcGFuPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJ3LWZ1bGwgcHktMi41IGJnLWdyYXktMTAwIGhvdmVyOmJnLWluZGlnby02MDAgaG92ZXI6dGV4dC13aGl0ZSByb3VuZGVkLWxnIHRyYW5zaXRpb24tYWxsIj5FbnJvbGwgTm93PC9idXR0b24+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgIDwvZGl2PgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJiZy1ncmFkaWVudC10by1yIGZyb20taW5kaWdvLTYwMCB0by1wdXJwbGUtNjAwIHJvdW5kZWQtMnhsIHAtOCB0ZXh0LXdoaXRlIHRleHQtY2VudGVyIj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0idGV4dC01eGwgbWItNCI+8J+PhjwvZGl2PgogICAgICAgICAgICA8aDMgY2xhc3M9InRleHQtM3hsIGZvbnQtYm9sZCBtYi0zIj5TdGFydCBZb3VyIExlYXJuaW5nIEpvdXJuZXkgVG9kYXk8L2gzPgogICAgICAgICAgICA8cCBjbGFzcz0idGV4dC14bCBtYi02Ij5BY2Nlc3MgcXVhbGl0eSBlZHVjYXRpb24gYXQganVzdCDigrk4MDAveWVhciDigKIgTGVhcm4gZnJvbSBpbmR1c3RyeSBleHBlcnRzIOKAoiBHZXQgY2VydGlmaWVkPC9wPgogICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJweC04IHB5LTQgYmctd2hpdGUgdGV4dC1pbmRpZ28tNjAwIHJvdW5kZWQteGwgaG92ZXI6c2hhZG93LTJ4bCB0cmFuc2l0aW9uLWFsbCBmb250LXNlbWlib2xkIj5HZXQgU3RhcnRlZCBGcmVlPC9idXR0b24+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KCiAgICA8c2NyaXB0PgogICAgICAgIGNvbnN0IHNsaWRlcyA9IFsKICAgICAgICAgICAgeyB0aXRsZTogJ01hc3RlciBQcm9kdWN0IE1hbmFnZW1lbnQnLCBzdWJ0aXRsZTogJ0xlYXJuIGZyb20gSW5kdXN0cnkgRXhwZXJ0cycsIGJnOiAnZnJvbS1pbmRpZ28tNjAwIHRvLXB1cnBsZS02MDAnIH0sCiAgICAgICAgICAgIHsgdGl0bGU6ICdEYXRhIFNjaWVuY2UgJiBBSScsIHN1YnRpdGxlOiAnQnVpbGQgWW91ciBGdXR1cmUgaW4gVGVjaCcsIGJnOiAnZnJvbS1ibHVlLTYwMCB0by1jeWFuLTYwMCcgfSwKICAgICAgICAgICAgeyB0aXRsZTogJ0xlYWRlcnNoaXAgU2tpbGxzJywgc3VidGl0bGU6ICdBZHZhbmNlIFlvdXIgQ2FyZWVyJywgYmc6ICdmcm9tLW9yYW5nZS02MDAgdG8tcmVkLTYwMCcgfSwKICAgICAgICAgICAgeyB0aXRsZTogJ0Rlc2lnbiBUaGlua2luZycsIHN1YnRpdGxlOiAnSW5ub3ZhdGUgJiBDcmVhdGUnLCBiZzogJ2Zyb20tZ3JlZW4tNjAwIHRvLWVtZXJhbGQtNjAwJyB9LAogICAgICAgICAgICB7IHRpdGxlOiAnU1FMICYgQW5hbHl0aWNzJywgc3VidGl0bGU6ICdNYXN0ZXIgRGF0YSBBbmFseXNpcycsIGJnOiAnZnJvbS10ZWFsLTYwMCB0by1ibHVlLTYwMCcgfQogICAgICAgIF07CiAgICAgICAgbGV0IGN1cnJlbnRTbGlkZSA9IDA7CgogICAgICAgIHNldEludGVydmFsKCgpID0+IHsKICAgICAgICAgICAgY3VycmVudFNsaWRlID0gKGN1cnJlbnRTbGlkZSArIDEpICUgc2xpZGVzLmxlbmd0aDsKICAgICAgICAgICAgY29uc3QgY2Fyb3VzZWwgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnY2Fyb3VzZWwnKTsKICAgICAgICAgICAgY2Fyb3VzZWwuY2xhc3NOYW1lID0gJ3JlbGF0aXZlIHJvdW5kZWQtMnhsIG92ZXJmbG93LWhpZGRlbiBzaGFkb3ctMnhsIG1iLTEyIGgtOTYgYmctZ3JhZGllbnQtdG8tciAnICsgc2xpZGVzW2N1cnJlbnRTbGlkZV0uYmcgKyAnIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTUwMCc7CiAgICAgICAgICAgIGNhcm91c2VsLnF1ZXJ5U2VsZWN0b3IoJ2gyJykudGV4dENvbnRlbnQgPSBzbGlkZXNbY3VycmVudFNsaWRlXS50aXRsZTsKICAgICAgICAgICAgY2Fyb3VzZWwucXVlcnlTZWxlY3RvcigncCcpLnRleHRDb250ZW50ID0gc2xpZGVzW2N1cnJlbnRTbGlkZV0uc3VidGl0bGU7CiAgICAgICAgfSwgNDAwMCk7CiAgICA8L3NjcmlwdD4KPC9ib2R5Pgo8L2h0bWw+" target="_blank" style="flex-shrink:0; background:var(--accent); color:#fff; font-size:13px; font-weight:600; padding:8px 18px; border-radius:6px; text-decoration:none; white-space:nowrap;">Open Prototype ↗</a>
+      </div>
+      <div style="border:1px solid var(--callout-blue-border); border-top:none; background:#f0f7ff; border-radius:0 0 8px 8px; padding:0.6rem 1.25rem; display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:14px;">💡</span>
+        <span style="font-size:12px; color:var(--text-secondary);"><strong style="color:var(--text);">How to view:</strong> Download the portfolio HTML file and open it in your browser — the prototype will launch in a new tab.</span>
+      </div>
+
+      <div class="h3">Resources</div>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:0.5rem;">
+                <div style="padding:0.65rem 1rem; background:#e8f0fe; border:1px solid #90caf9; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="window.open('https://drive.google.com/file/d/1HUVFm9Fe5oDZetQBvwSc43gbdIdUXDeC/view?usp=sharing','_blank');">
+          <span style="font-size:16px;">📎</span>
+          <span style="font-size:13px; font-weight:600; color:#1565c0; text-decoration:underline;">Product Assessment : G Drive ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL: PRDs -->
+    <div id="cs-prd" class="cs-detail" style="display:none;">
+      <div class="cs-detail-header">
+        <button class="cs-back" onclick="toggleDetail('cs-prd')">← Back to Case Studies</button>
+        <div class="cs-detail-tag">PRDs</div>
+      </div>
+      <div class="h2" style="margin-top:1rem;">Canva — OTP Login Feature (Omnify Assessment)</div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:0.85rem;">Date: 05 Sep 2024 &nbsp;·&nbsp; Stakeholders: Developers, UI/UX Designer, Users</p>
+
+      <div class="callout-grid">
+        <div class="callout yellow">
+          <div class="callout-label"><span class="callout-icon">☆</span> Product vision</div>
+          <p>Free to use online graphic tools to design and publish everywhere</p>
+        </div>
+        <div class="callout blue">
+          <div class="callout-label"><span class="callout-icon">⚙</span> Feature goal</div>
+          <p>Phone number OTP login — easy, user-friendly &amp; faster way to sign in</p>
+        </div>
+      </div>
+
+      <div class="h3">Problem</div>
+      <p>Users were demotivated to go through a time-consuming sign-up process to get into Canva's design tool. OTP-based mobile login was <strong>not available</strong> in India, creating a gap for users who prefer phone-first authentication.</p>
+
+      <div class="h3">User Personas</div>
+      <div class="callout-grid">
+        <div class="callout blue">
+          <div class="callout-label"><span class="callout-icon">◈</span> Persona 1</div>
+          <p><strong>Shivam, 27 — Young Professional</strong></p>
+          <p>Engineer wanting to make a creative, appealing resume to get shortlisted for PM interview calls.</p>
+        </div>
+        <div class="callout yellow">
+          <div class="callout-label"><span class="callout-icon">◈</span> Persona 2</div>
+          <p><strong>Lisa, 38 — Senior Manager</strong></p>
+          <p>Wants to make a farewell party invite for a team member leaving after 10 years.</p>
+        </div>
+      </div>
+
+      <div class="h3">Epics &amp; Technical Specifications</div>
+      <ul class="nlist">
+        <li><strong>Feature 1:</strong> Create a web page with OTP login flow</li>
+        <li><strong>Feature 2:</strong> OTP server provider to handle generation and verification</li>
+        <li><strong>Feature 3:</strong> Link webpage and OTP together</li>
+      </ul>
+      <ul class="nlist">
+        <li>Web page and OTP input for users to enter</li>
+        <li>OTP data storage, generation and SMS sent to the user</li>
+        <li>Web pages and OTP integration</li>
+        <li>Limit the abuse of OTP features &amp; record number of OTPs</li>
+        <li>OTP should only be numeric; resend option if not received</li>
+      </ul>
+
+      <div class="h3">Design Requirements — Wireframes</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:1rem 0 0.5rem;">
+        <div style="text-align:center;">
+          <div style="font-size:10px; font-weight:600; color:var(--text); border:1px solid #aaa; border-radius:3px; padding:2px 6px; display:inline-block; margin-bottom:6px; letter-spacing:0.04em;">HOME SCREEN</div>
+          <div style="border:2px solid #333; border-radius:18px; padding:10px 8px 8px; background:#fff; min-height:200px;">
+            <div style="width:30px;height:5px;background:#333;border-radius:3px;margin:0 auto 8px;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div style="background:#5b5bd6;color:#fff;font-size:7px;font-weight:700;padding:2px 5px;border-radius:3px;">Canva</div>
+              <div style="display:flex;gap:3px;">
+                <div style="border:1px solid #aaa;border-radius:2px;font-size:7px;padding:1px 4px;">Login</div>
+                <div style="border:1px solid #5b5bd6;background:#5b5bd6;color:#fff;border-radius:2px;font-size:7px;padding:1px 4px;">Signup</div>
+              </div>
+            </div>
+            <div style="background:#5b5bd6;color:#fff;font-size:7px;font-weight:600;text-align:center;padding:3px;border-radius:3px;margin-bottom:8px;">START DESIGNING</div>
+            <div style="display:flex;gap:4px;margin-bottom:8px;">
+              <div style="flex:1;height:28px;border:1px solid #aaa;border-radius:3px;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 14 14"><line x1="0" y1="0" x2="14" y2="14" stroke="#aaa" stroke-width="1"/><line x1="14" y1="0" x2="0" y2="14" stroke="#aaa" stroke-width="1"/><rect x="0" y="0" width="14" height="14" fill="none" stroke="#aaa" stroke-width="1"/></svg></div>
+              <div style="flex:1;height:28px;border:1px solid #aaa;border-radius:3px;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 14 14"><line x1="0" y1="0" x2="14" y2="14" stroke="#aaa" stroke-width="1"/><line x1="14" y1="0" x2="0" y2="14" stroke="#aaa" stroke-width="1"/><rect x="0" y="0" width="14" height="14" fill="none" stroke="#aaa" stroke-width="1"/></svg></div>
+              <div style="flex:1;height:28px;border:1px solid #aaa;border-radius:3px;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 14 14"><line x1="0" y1="0" x2="14" y2="14" stroke="#aaa" stroke-width="1"/><line x1="14" y1="0" x2="0" y2="14" stroke="#aaa" stroke-width="1"/><rect x="0" y="0" width="14" height="14" fill="none" stroke="#aaa" stroke-width="1"/></svg></div>
+            </div>
+            <div style="background:#d1d5db;border-radius:4px;padding:4px 2px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Q</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">W</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">E</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">R</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">T</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Y</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">U</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">I</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">O</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">P</span></div>
+              <div style="display:flex;justify-content:center;gap:2px;margin-bottom:2px;"><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">A</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">S</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">D</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">F</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">G</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">H</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">J</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">K</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">L</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0 2px;"><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">⇧</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Z</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">X</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">C</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">V</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">B</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">N</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">M</span><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">⌫</span></div>
+              <div style="display:flex;gap:2px;margin-top:2px;"><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">123</span><span style="flex:1;font-size:5px;background:#fff;border-radius:2px;padding:1px;text-align:center;">space</span><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">return</span></div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--text-secondary);margin-top:6px;">Click on the sign up option</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px; font-weight:600; color:var(--text); border:1px solid #aaa; border-radius:3px; padding:2px 6px; display:inline-block; margin-bottom:6px; letter-spacing:0.04em;">SCREEN 1</div>
+          <div style="border:2px solid #333; border-radius:18px; padding:10px 8px 8px; background:#fff; min-height:200px;">
+            <div style="width:30px;height:5px;background:#333;border-radius:3px;margin:0 auto 8px;"></div>
+            <div style="font-size:7px;color:#555;text-align:center;margin-bottom:14px;">‹ Continue to Canva</div>
+            <div style="border:1px solid #aaa;border-radius:3px;font-size:7px;text-align:center;padding:3px;margin-bottom:4px;">Continue with Google</div>
+            <div style="border:1px solid #aaa;border-radius:3px;font-size:7px;text-align:center;padding:3px;margin-bottom:4px;">Continue with Facebook</div>
+            <div style="background:#5b5bd6;color:#fff;border-radius:3px;font-size:7px;font-weight:600;text-align:center;padding:3px;margin-bottom:12px;">Continue with mobile number</div>
+            <div style="background:#d1d5db;border-radius:4px;padding:4px 2px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Q</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">W</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">E</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">R</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">T</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Y</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">U</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">I</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">O</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">P</span></div>
+              <div style="display:flex;justify-content:center;gap:2px;margin-bottom:2px;"><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">A</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">S</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">D</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">F</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">G</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">H</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">J</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">K</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">L</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0 2px;"><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">⇧</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Z</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">X</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">C</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">V</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">B</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">N</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">M</span><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">⌫</span></div>
+              <div style="display:flex;gap:2px;margin-top:2px;"><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">123</span><span style="flex:1;font-size:5px;background:#fff;border-radius:2px;padding:1px;text-align:center;">space</span><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">return</span></div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--text-secondary);margin-top:6px;">Click "continue with mobile number"</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px; font-weight:600; color:var(--text); border:1px solid #aaa; border-radius:3px; padding:2px 6px; display:inline-block; margin-bottom:6px; letter-spacing:0.04em;">SCREEN 2</div>
+          <div style="border:2px solid #333; border-radius:18px; padding:10px 8px 8px; background:#fff; min-height:200px;">
+            <div style="width:30px;height:5px;background:#333;border-radius:3px;margin:0 auto 8px;"></div>
+            <div style="border:1px solid #aaa;border-radius:3px;font-size:7px;padding:5px;text-align:center;line-height:1.4;margin-bottom:10px;">We will send you a OTP via SMS on your phone to login</div>
+            <div style="border:1px solid #333;border-radius:3px;font-size:7px;padding:4px 6px;margin-bottom:14px;">+91  XXXXX XXXXX</div>
+            <div style="background:#d1d5db;border-radius:4px;padding:4px 2px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Q</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">W</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">E</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">R</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">T</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Y</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">U</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">I</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">O</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">P</span></div>
+              <div style="display:flex;justify-content:center;gap:2px;margin-bottom:2px;"><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">A</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">S</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">D</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">F</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">G</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">H</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">J</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">K</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">L</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0 2px;"><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">⇧</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Z</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">X</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">C</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">V</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">B</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">N</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">M</span><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">⌫</span></div>
+              <div style="display:flex;gap:2px;margin-top:2px;"><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">123</span><span style="flex:1;font-size:5px;background:#fff;border-radius:2px;padding:1px;text-align:center;">space</span><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">return</span></div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--text-secondary);margin-top:6px;">Enter the 10 digit number</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px; font-weight:600; color:var(--text); border:1px solid #aaa; border-radius:3px; padding:2px 6px; display:inline-block; margin-bottom:6px; letter-spacing:0.04em;">SCREEN 3</div>
+          <div style="border:2px solid #333; border-radius:18px; padding:10px 8px 8px; background:#fff; min-height:200px;">
+            <div style="width:30px;height:5px;background:#333;border-radius:3px;margin:0 auto 16px;"></div>
+            <div style="display:flex;justify-content:center;gap:5px;margin-bottom:8px;">
+              <div style="width:18px;height:18px;border:1.5px solid #333;border-radius:3px;"></div>
+              <div style="width:18px;height:18px;border:1.5px solid #333;border-radius:3px;"></div>
+              <div style="width:18px;height:18px;border:1.5px solid #333;border-radius:3px;"></div>
+              <div style="width:18px;height:18px;border:1.5px solid #333;border-radius:3px;"></div>
+            </div>
+            <div style="background:#7c3aed;color:#fff;border-radius:3px;font-size:7px;font-weight:700;text-align:center;padding:3px;margin-bottom:6px;">SUBMIT</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:3px;margin-bottom:10px;"><span style="font-size:6px;color:#555;">Did not receive OTP</span><span style="background:#fbbf24;color:#000;border-radius:2px;font-size:6px;font-weight:700;padding:1px 4px;">RESEND</span></div>
+            <div style="background:#d1d5db;border-radius:4px;padding:4px 2px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Q</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">W</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">E</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">R</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">T</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Y</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">U</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">I</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">O</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">P</span></div>
+              <div style="display:flex;justify-content:center;gap:2px;margin-bottom:2px;"><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">A</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">S</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">D</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">F</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">G</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">H</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">J</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">K</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">L</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0 2px;"><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">⇧</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">Z</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">X</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">C</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">V</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">B</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">N</span><span style="font-size:5px;background:#fff;border-radius:2px;padding:1px 2px;">M</span><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">⌫</span></div>
+              <div style="display:flex;gap:2px;margin-top:2px;"><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">123</span><span style="flex:1;font-size:5px;background:#fff;border-radius:2px;padding:1px;text-align:center;">space</span><span style="font-size:5px;background:#aaa;border-radius:2px;padding:1px 3px;">return</span></div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--text-secondary);margin-top:6px;">Enter the OTP</div>
+        </div>
+      </div>
+      <div style="background:var(--surface); border-radius:6px; padding:0.85rem 1rem; margin:0.75rem 0 1rem; border:1px solid var(--border);">
+        <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:6px;">Notes</div>
+        <ul class="nlist" style="margin:0;">
+          <li style="font-size:13px;">Only numeric OTPs accepted</li>
+          <li style="font-size:13px;">Send SMS verification 'X' times only</li>
+          <li style="font-size:13px;">Font &amp; size should be visible; background white</li>
+          <li style="font-size:13px;">Submit button — <strong style="color:#7c3aed;">purple</strong></li>
+          <li style="font-size:13px;">Resend button — <strong style="color:#b45309;">yellow</strong></li>
+        </ul>
+      </div>
+
+      <div class="h3">Success Metrics</div>
+      <ul class="nlist">
+        <li>Time taken to complete OTP login</li>
+        <li>User feedback experience on OTP login</li>
+        <li>Drop-off rate during OTP completion</li>
+        <li>OTP success rate (correct OTP entered) &amp; delivery rate (OTP delivered to user)</li>
+      </ul>
+
+      <div class="h3">Resources</div>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:0.5rem;">
+        <div style="padding:0.65rem 1rem; background:#fff3e0; border:1px solid #ffcc80; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="window.open('https://www.youtube.com/watch?v=ymnS5hZ2ZCE','_blank');">
+          <span style="font-size:16px;">▶️</span>
+          <span style="font-size:13px; font-weight:600; color:#e65100; text-decoration:underline;">Video Walkthrough on YouTube ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL: Product Teardown -->
+    <div id="cs-teardown" class="cs-detail" style="display:none;">
+      <div class="cs-detail-header">
+        <button class="cs-back" onclick="toggleDetail('cs-teardown')">← Back to Case Studies</button>
+        <div class="cs-detail-tag">Product Teardown</div>
+      </div>
+      <div class="h2" style="margin-top:1rem;">Moqups — Product Wireframing &amp; Collaboration Tool</div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:0.85rem;">Assessment by Shivam Rustagi &nbsp;·&nbsp; Aug 2024 </p>
+
+      <div class="callout-grid">
+        <div class="callout yellow">
+          <div class="callout-label"><span class="callout-icon">☆</span> Mission</div>
+          <p>Single user-friendly environment for teams to create, iterate and collaborate through various projects</p>
+        </div>
+        <div class="callout blue">
+          <div class="callout-label"><span class="callout-icon">⚙</span> Vision</div>
+          <p>From low-fidelity wireframes to high-fidelity mockups with real-time collaboration &amp; integrations</p>
+        </div>
+      </div>
+
+      <div class="h3">1) Product Overview</div>
+      <p>Moqups is a collaboration tool offering an all-in-one experience to empower teams for creating wireframes, mockups, and prototypes — aiding effective discussion throughout the design process. It serves <strong>2M+ users</strong>, predominantly SMBs and startups.</p>
+      <p><strong>Products offered:</strong> Wireframes, Flowcharts, Graphs, Online Whiteboard</p>
+      <p><strong>Templates:</strong> Wireframe &amp; UI, Mapping &amp; Diagram, Planning &amp; Ideation, Charts &amp; Infographics</p>
+
+      <div class="h3">Core Functionality</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:0.75rem 0 1rem;">
+        <div style="border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem;"><div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:4px;">Wireframing</div><div style="font-size:13px; color:var(--text-secondary);">Drag &amp; drop UI elements for app screens, websites</div></div>
+        <div style="border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem;"><div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:4px;">Mockups</div><div style="font-size:13px; color:var(--text-secondary);">Feature representations for stakeholder reviews</div></div>
+        <div style="border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem;"><div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:4px;">Diagrams</div><div style="font-size:13px; color:var(--text-secondary);">Mind maps, decision trees</div></div>
+        <div style="border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem;"><div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:4px;">Prototyping</div><div style="font-size:13px; color:var(--text-secondary);">Interactive user flows with clickable mockups</div></div>
+      </div>
+
+      <div class="h3">2) UI/UX Analysis</div>
+      <div class="callout-grid">
+        <div class="callout blue">
+          <div class="callout-label"><span class="callout-icon">+</span> Strengths</div>
+          <p>Clean, minimal web-based UI · Ease of use</p>
+          <p>Rich library of templates &amp; kits</p>
+          <p>Quick design iterations</p>
+          <p>Real-time collaboration &amp; sharing via link</p>
+        </div>
+        <div class="callout yellow">
+          <div class="callout-label"><span class="callout-icon">!</span> Weaknesses</div>
+          <p>No Smart Animate / motion feature</p>
+          <p>No AI assistant for wireframe generation</p>
+          <p>No OTP login — friction for new/guest users</p>
+          <p>Weak 3rd-party integrations (JIRA, Confluence)</p>
+        </div>
+      </div>
+
+      <div class="h3">3) Competitive Benchmark</div>
+      <div style="overflow-x:auto; margin:0.75rem 0 1rem;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead><tr style="border-bottom:2px solid var(--border);">
+            <th style="text-align:left; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px; text-transform:uppercase; letter-spacing:0.04em;">Feature</th>
+            <th style="text-align:left; padding:6px 10px; font-weight:600; color:#1a7a6e; font-size:12px; text-transform:uppercase;">Moqups</th>
+            <th style="text-align:left; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px; text-transform:uppercase;">Figma</th>
+            <th style="text-align:left; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px; text-transform:uppercase;">Sketch</th>
+            <th style="text-align:left; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px; text-transform:uppercase;">Balsamiq</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:7px 10px; color:var(--text-secondary);">Ease of use</td><td style="padding:7px 10px;">Simple, intuitive</td><td style="padding:7px 10px;">Moderate</td><td style="padding:7px 10px;">Moderate (Mac)</td><td style="padding:7px 10px;">Simple</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:7px 10px; color:var(--text-secondary);">Design depth</td><td style="padding:7px 10px;">Low to high</td><td style="padding:7px 10px;">High</td><td style="padding:7px 10px;">High</td><td style="padding:7px 10px;">Low</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:7px 10px; color:var(--text-secondary);">Prototyping</td><td style="padding:7px 10px;">Basic + Stencils</td><td style="padding:7px 10px;">Advanced + Smart Animate</td><td style="padding:7px 10px;">Advanced + Smart Animate</td><td style="padding:7px 10px;">Static wireframes</td></tr>
+            <tr><td style="padding:7px 10px; color:var(--text-secondary);">Offline access</td><td style="padding:7px 10px;">No</td><td style="padding:7px 10px;">No</td><td style="padding:7px 10px;">Mac offline</td><td style="padding:7px 10px;">Desktop offline</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="h3">4) Pricing</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin:0.75rem 0 1rem;">
+        <div style="border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem; text-align:center;"><div style="font-size:11px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">Solo</div><div style="font-size:1.4rem; font-weight:700; color:#1a7a6e;">$12<span style="font-size:12px; font-weight:400;">/mo</span></div><div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">1 seat · Unlimited projects</div></div>
+        <div style="border:2px solid #1a7a6e; border-radius:6px; padding:0.75rem 1rem; text-align:center;"><div style="font-size:11px; font-weight:600; color:#1a7a6e; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">Teams ★</div><div style="font-size:1.4rem; font-weight:700; color:#1a7a6e;">$30<span style="font-size:12px; font-weight:400;">/mo</span></div><div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">5 seats · Real-time collab · SAML SSO</div></div>
+        <div style="border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem; text-align:center;"><div style="font-size:11px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">Unlimited</div><div style="font-size:1.4rem; font-weight:700; color:#1a7a6e;">$89<span style="font-size:12px; font-weight:400;">/mo</span></div><div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">No seat limit · SCIM · Access controls</div></div>
+      </div>
+
+      <div class="h3">5) RICE Prioritization</div>
+      <div style="overflow-x:auto; margin:0.75rem 0 1rem;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead><tr style="border-bottom:2px solid var(--border);">
+            <th style="text-align:left; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px; text-transform:uppercase; letter-spacing:0.04em;">Feature</th>
+            <th style="text-align:center; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px;">R</th>
+            <th style="text-align:center; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px;">I</th>
+            <th style="text-align:center; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px;">C</th>
+            <th style="text-align:center; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px;">E</th>
+            <th style="text-align:center; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px;">Score</th>
+            <th style="text-align:left; padding:6px 10px; font-weight:600; color:var(--text-secondary); font-size:12px;">Priority</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border); background:rgba(234,243,222,0.4);"><td style="padding:7px 10px; font-weight:500;">AI Assistant</td><td style="padding:7px 10px; text-align:center;">3</td><td style="padding:7px 10px; text-align:center;">4</td><td style="padding:7px 10px; text-align:center;">3</td><td style="padding:7px 10px; text-align:center;">3</td><td style="padding:7px 10px; text-align:center; font-weight:700; color:#1a7a6e;">12</td><td style="padding:7px 10px; font-size:12px;">🎯 Big Bet</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:7px 10px; font-weight:500;">Email OTP Login</td><td style="padding:7px 10px; text-align:center;">3</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center;">3</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center; font-weight:700; color:#1a7a6e;">9</td><td style="padding:7px 10px; font-size:12px;">⚡ Quick Win</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:7px 10px; font-weight:500;">3rd Party Integration</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center; font-weight:700;">4</td><td style="padding:7px 10px; font-size:12px;">🔗 Strategic Enabler</td></tr>
+            <tr><td style="padding:7px 10px; font-weight:500;">Smart Animate</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center;">2</td><td style="padding:7px 10px; text-align:center;">3</td><td style="padding:7px 10px; text-align:center; font-weight:700;">2.6</td><td style="padding:7px 10px; font-size:12px;">🌟 Long-term Bet</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="h3">6) Product Roadmap (12–15 Months)</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:0.75rem 0 1rem;">
+        <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);"><div style="background:#1a7a6e; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">Phase 1 · Month 0–3</div><div style="padding:10px 12px;"><div style="font-size:12px; font-weight:600; color:var(--text-secondary); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.04em;">Quick Win</div><ul class="nlist" style="margin:0;"><li style="font-size:13px;">Email OTP login</li></ul><div style="font-size:12px; color:var(--text-secondary); margin-top:6px;">Team: Front end, Back end, QA</div></div></div>
+        <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);"><div style="background:#2078b4; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">Phase 2 · Month 4–12</div><div style="padding:10px 12px;"><div style="font-size:12px; font-weight:600; color:var(--text-secondary); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.04em;">Major Projects</div><ul class="nlist" style="margin:0;"><li style="font-size:13px;">AI Assistant</li><li style="font-size:13px;">3rd Party Integrations (JIRA &amp; Confluence)</li></ul><div style="font-size:12px; color:var(--text-secondary); margin-top:6px;">Team: AI/ML, Backend, FE, Data Scientist, PM</div></div></div>
+      </div>
+
+      <div class="h3">Resources</div>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:0.5rem;">
+        <div style="padding:0.65rem 1rem; background:#fff3e0; border:1px solid #ffcc80; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="window.open('https://www.youtube.com/watch?v=xiXffZJLVDI','_blank');">
+          <span style="font-size:16px;">▶️</span>
+          <span style="font-size:13px; font-weight:600; color:#e65100; text-decoration:underline;">Video Walkthrough on YouTube ↗</span>
+        </div>
+        <div style="padding:0.65rem 1rem; background:#e8f0fe; border:1px solid #90caf9; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="window.open('https://drive.google.com/file/d/1St7p4F7fyN5gAc8LYAfhjc0wfdXZN60r/view?usp=sharing','_blank');">
+          <span style="font-size:16px;">📎</span>
+          <span style="font-size:13px; font-weight:600; color:#1565c0; text-decoration:underline;">Product Assessment : G Drive ↗</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end toggle-body -->
+    </div><!-- end toggle -->
+  </div><!-- end case-studies -->
+
+  <hr class="divider">
+
+  <!-- AI PRODUCT CASE STUDIES -->
+  <div id="ai-case-studies">
+    <div class="toggle open">
+      <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="toggle-arrow">▶</span>
+        <span class="h1" style="margin:0;">AI Product Case Studies</span>
+      </div>
+      <div class="toggle-body">
+        <hr class="divider">
+
+        <!-- AI CASE STUDY CARDS -->
+        <div class="cs-grid" id="ai-cs-grid">
+
+          <!-- Card: Voyageur -->
+          <div class="cs-card" onclick="toggleAIDetail('ai-cs-voyageur')">
+            <div class="cs-card-top">
+              <div class="cs-icon-wrap" style="background:#e8f0fe;"><span>✈️</span></div>
+              <span class="cs-tag" style="color:#1565c0;">AI Product</span>
+              <span style="font-size:10px; font-weight:700; letter-spacing:0.07em; background:#fff3e0; color:#e65100; border:1px solid #ffcc80; border-radius:4px; padding:2px 8px;">TRAVEL TECH</span>
+              <span class="cs-arrow">↗</span>
+            </div>
+            <div class="cs-card-title">Voyageur — AI Trip Planner</div>
+            <div class="cs-card-desc">Built a natural-language itinerary generator with persistent memory — from terminal MVP to Streamlit web app in 1 day, $0 cost.</div>
+            <div class="cs-badges">
+              <span class="cs-badge">Llama 3.1 70B</span>
+              <span class="cs-badge">⚡ Vibe Coded</span>
+              <span class="cs-badge">Mem0 + ChromaDB</span>
+              <span class="cs-badge">4/4 Milestones</span>
+            </div>
+            <div style="margin-top:0.85rem; padding-top:0.75rem; border-top:1px dashed var(--border); display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:11.5px; color:var(--text-secondary); font-weight:500;">Click for more details</span>
+              <span style="font-size:11px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2px 10px; color:var(--text-secondary);">↗ View case study</span>
+            </div>
+          </div>
+
+          <!-- Coming soon card -->
+          <div style="border:1.5px dashed var(--border); border-radius:12px; padding:1.25rem 1.1rem; background:#fafafa; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:8px; min-height:200px;">
+            <div style="font-size:1.5rem;">🌱</div>
+            <div style="font-size:14px; font-weight:600; color:var(--text);">More coming soon</div>
+            <div style="font-size:13px; color:var(--text-secondary); line-height:1.6;">As part of the AI learning curve — more end-to-end AI native products to come.</div>
+            <div style="font-size:13px; color:var(--text-secondary); font-style:italic;">Happy Learning.</div>
+          </div>
+
+        </div><!-- end ai-cs-grid -->
+
+        <!-- AI DETAIL PANELS (added per card below) -->
+
+        <!-- DETAIL: Voyageur -->
+        <div id="ai-cs-voyageur" class="cs-detail" style="display:none;">
+          <div class="cs-detail-header">
+            <button class="cs-back" onclick="toggleAIDetail('ai-cs-voyageur')">← Back to AI Case Studies</button>
+            <div class="cs-detail-tag" style="background:#e8f0fe; color:#1565c0;">AI Product · Travel Tech</div>
+          </div>
+
+          <div class="h2" style="margin-top:1rem;">Voyageur — AI Trip Planner</div>
+
+          <div class="callout-grid">
+            <div class="callout yellow">
+              <div class="callout-label"><span class="callout-icon">◎</span> Outcome</div>
+              <p>Full product shipped in <strong>1 day</strong>, <strong>$0 cost</strong></p>
+              <p>4/4 milestones completed · 2 interfaces · 2 memory layers</p>
+            </div>
+            <div class="callout blue">
+              <div class="callout-label"><span class="callout-icon">◈</span> My Role</div>
+              <p>AI PM — product vision, feature prompts (as PRD), tech stack decisions, 4-milestone roadmap, E2E testing &amp; debugging</p>
+            </div>
+          </div>
+
+          <p><strong>Problem:</strong> Planning a trip takes 3–4 hours scattered across Google, TripAdvisor, blogs, and budget calculators. Travelers know what they want in plain English — they just need someone to organize it.</p>
+          <p><strong>Opportunity:</strong> An AI assistant that understands natural language, generates structured itineraries, and remembers preferences across sessions.</p>
+
+          <div class="h3">User Persona</div>
+          <p><strong>Shiv</strong>, 26 — MBA student. Pain: 3–4 hrs per trip plan. Goal: personalized itinerary in minutes. Constraints: budget-conscious, vegetarian.</p>
+
+          <div class="h3">Product Roadmap</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0.75rem 0 1rem;">
+            <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+              <div style="background:#1a7a6e; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">M1 · Core MVP ✅</div>
+              <div style="padding:10px 12px; font-size:13px;">Describe trip → structured day-by-day plan with costs in INR (terminal)</div>
+            </div>
+            <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+              <div style="background:#2078b4; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">M2 · Conversational ✅</div>
+              <div style="padding:10px 12px; font-size:13px;">Multi-turn chat — refine itinerary through natural conversation</div>
+            </div>
+            <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+              <div style="background:#5c3d8f; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">M3 · Persistent Memory ✅</div>
+              <div style="padding:10px 12px; font-size:13px;">Dual memory layer — Mem0 (cloud) + ChromaDB (local offline fallback)</div>
+            </div>
+            <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+              <div style="background:#b85a00; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">M4 · Web Interface ✅</div>
+              <div style="padding:10px 12px; font-size:13px;">Streamlit web app with visual cards — no terminal needed</div>
+            </div>
+          </div>
+
+          <!-- Milestone Detail Prompts -->
+          <div class="h3">Prompt Engineering &amp; Vibe Coding</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 1.25rem;">
+
+            <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+              <div style="background:#1a7a6e; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">M1 · Setup &amp; One-Shot Planner</div>
+              <div style="padding:10px 12px; font-size:13px;">Build Voyageur using Python, Groq (Llama 3.3 70B), and Pydantic. Accept plain-English travel requests, generate a structured trip brief and day-by-day itinerary with INR costs. Handle malformed JSON with retry logic. Keep the AI layer modular for future enhancements.</div>
+            </div>
+
+            <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+              <div style="background:#2078b4; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">M2 · Conversational Refinement</div>
+              <div style="padding:10px 12px; font-size:13px;">Transform into a multi-turn assistant. Maintain conversation history so users can refine plans, ask follow-ups, and request alternatives in natural language. Keep itineraries internally consistent. End each session with a final consolidated itinerary.</div>
+            </div>
+
+            <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+              <div style="background:#5c3d8f; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">M3 · Memory with Mem0 + ChromaDB</div>
+              <div style="padding:10px 12px; font-size:13px;">Add persistent memory using Mem0 (cloud) and ChromaDB (local fallback). Load preferences at session start, personalise responses. At session end, extract meaningful signals — dietary needs, budget, travel style. Include a debug command to inspect stored memories.</div>
+            </div>
+
+            <div style="border-radius:6px; overflow:hidden; border:1px solid var(--border);">
+              <div style="background:#b85a00; color:#fff; font-size:13px; font-weight:600; padding:8px 12px;">M4 · Shareable Web Frontend</div>
+              <div style="padding:10px 12px; font-size:13px;">Build a Streamlit web interface — no terminal needed. Support itinerary generation, conversational refinement, and memory-enabled interactions. Display plans in a structured visual format. Integrate cleanly with existing backend without modifying planning, chat, or memory layers.</div>
+            </div>
+
+          </div>
+
+          <div class="h3">Tech Stack</div>
+          <div style="overflow-x:auto; margin:0.5rem 0 1rem;">
+            <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+              <thead><tr style="background:var(--surface);">
+                <th style="padding:7px 10px; text-align:left; font-weight:600; border-bottom:1px solid var(--border);">Layer</th>
+                <th style="padding:7px 10px; text-align:left; font-weight:600; border-bottom:1px solid var(--border);">Tool</th>
+                <th style="padding:7px 10px; text-align:left; font-weight:600; border-bottom:1px solid var(--border);">Why</th>
+              </tr></thead>
+              <tbody>
+                <tr><td style="padding:7px 10px;">AI Model</td><td style="padding:7px 10px; font-weight:500;">Llama 3.1 70B</td><td style="padding:7px 10px; color:var(--text-secondary);">Free, capable</td></tr>
+                <tr style="background:var(--surface);"><td style="padding:7px 10px;">Inference</td><td style="padding:7px 10px; font-weight:500;">Groq API</td><td style="padding:7px 10px; color:var(--text-secondary);">Fast, free tier</td></tr>
+                <tr><td style="padding:7px 10px;">Memory Cloud</td><td style="padding:7px 10px; font-weight:500;">Mem0</td><td style="padding:7px 10px; color:var(--text-secondary);">Plug and play</td></tr>
+                <tr style="background:var(--surface);"><td style="padding:7px 10px;">Memory Local</td><td style="padding:7px 10px; font-weight:500;">ChromaDB</td><td style="padding:7px 10px; color:var(--text-secondary);">Offline fallback</td></tr>
+                <tr><td style="padding:7px 10px;">Validation</td><td style="padding:7px 10px; font-weight:500;">Pydantic</td><td style="padding:7px 10px; color:var(--text-secondary);">Structured output</td></tr>
+                <tr style="background:var(--surface);"><td style="padding:7px 10px;">Frontend</td><td style="padding:7px 10px; font-weight:500;">Streamlit</td><td style="padding:7px 10px; color:var(--text-secondary);">Ship fast</td></tr>
+                <tr><td style="padding:7px 10px;">API Layer</td><td style="padding:7px 10px; font-weight:500;">FastAPI</td><td style="padding:7px 10px; color:var(--text-secondary);">Lightweight, async</td></tr>
+                <tr style="background:var(--surface);"><td style="padding:7px 10px;">Coding Agent</td><td style="padding:7px 10px; font-weight:500;">Gemini CLI</td><td style="padding:7px 10px; color:var(--text-secondary);">Vibe coding</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="h3">Metrics</div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:0.5rem 0 1rem;">
+            <div style="background:var(--surface); border-radius:8px; padding:12px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700;">3 hrs</div>
+              <div style="font-size:12px; color:var(--text-secondary);">MVP shipped</div>
+            </div>
+            <div style="background:var(--surface); border-radius:8px; padding:12px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700;">1 day</div>
+              <div style="font-size:12px; color:var(--text-secondary);">Full product</div>
+            </div>
+            <div style="background:var(--surface); border-radius:8px; padding:12px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700;">$0</div>
+              <div style="font-size:12px; color:var(--text-secondary);">Total cost</div>
+            </div>
+            <div style="background:var(--surface); border-radius:8px; padding:12px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700;">8</div>
+              <div style="font-size:12px; color:var(--text-secondary);">Files built</div>
+            </div>
+            <div style="background:var(--surface); border-radius:8px; padding:12px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700;">2</div>
+              <div style="font-size:12px; color:var(--text-secondary);">Memory layers</div>
+            </div>
+            <div style="background:var(--surface); border-radius:8px; padding:12px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700;">4/4</div>
+              <div style="font-size:12px; color:var(--text-secondary);">Milestones done</div>
+            </div>
+          </div>
+
+          <div class="h3">PM Skills Demonstrated</div>
+
+          <div style="overflow-x:auto; margin:0.75rem 0 1.25rem;">
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+              <thead>
+                <tr style="background:var(--surface);">
+                  <th style="padding:7px 10px; text-align:left; font-weight:600; border-bottom:2px solid var(--border); width:30%;">Skill</th>
+                  <th style="padding:7px 10px; text-align:left; font-weight:600; border-bottom:2px solid var(--border); width:15%;">Category</th>
+                  <th style="padding:7px 10px; text-align:left; font-weight:600; border-bottom:2px solid var(--border);">Signals</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="3" style="padding:6px 10px; font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-secondary); background:#fafafa; border-bottom:1px solid var(--border);">Core PM</td></tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:7px 10px;">User problem definition</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Discovery</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Pain quantified · Persona with constraints</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border); background:var(--surface);">
+                  <td style="padding:7px 10px;">Milestone roadmapping</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Strategy</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Dependency ordering · 4/4 shipped</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:7px 10px;">Scope control</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Strategy</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Explicit de-scoping · Said no with reason</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border); background:var(--surface);">
+                  <td style="padding:7px 10px;">Technical trade-offs</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Tech literacy</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Build vs buy · Zero-cost stack</td>
+                </tr>
+                <tr><td colspan="3" style="padding:6px 10px; font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-secondary); background:#fafafa; border-bottom:1px solid var(--border);">Execution &amp; Delivery</td></tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:7px 10px;">Modular architecture</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Execution</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Future-proofed M1 · Separation of concerns</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border); background:var(--surface);">
+                  <td style="padding:7px 10px;">Testability as requirement</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Execution</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Debug command · Observability by design</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:7px 10px;">User voice in specs</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Execution</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Natural language · Empathy in specs</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border); background:var(--surface);">
+                  <td style="padding:7px 10px;">Velocity tracking</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Execution</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Time-to-ship · Cost as metric</td>
+                </tr>
+                <tr><td colspan="3" style="padding:6px 10px; font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-secondary); background:#fafafa; border-bottom:1px solid var(--border);">AI PM Specific</td></tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:7px 10px;">Prompt as product spec</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">AI PM · Core</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Structured requirements · Edge cases addressed</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border); background:var(--surface);">
+                  <td style="padding:7px 10px;">Memory architecture</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">AI PM · Advanced</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Fallback design · Signal vs noise</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:7px 10px;">Structured output design</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">AI PM · Core</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Schema-first · Typed output fields</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border); background:var(--surface);">
+                  <td style="padding:7px 10px;">AI failure mode planning</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">AI PM · Reliability</td>
+                  <td style="padding:7px 10px; color:var(--text-secondary);">Retry logic · Graceful degradation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="h3">AI Native Prototype</div>
+          <div style="display:flex; flex-direction:column; gap:8px; margin:0.5rem 0 1.25rem;">
+            <div style="padding:0.65rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:13px; font-weight:600;">MVP</span>
+              <span style="font-size:12px; color:var(--text-secondary); background:#fff8e1; border:1px solid #ffe082; border-radius:20px; padding:2px 10px;">🔧 WIP — uploading to GitHub &amp; Streamlit</span>
+            </div>
+            <div style="padding:0.65rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:13px; font-weight:600;">Functional Prototype</span>
+              <span style="font-size:12px; color:var(--text-secondary); background:#fff8e1; border:1px solid #ffe082; border-radius:20px; padding:2px 10px;">🔧 WIP — uploading to GitHub &amp; Streamlit</span>
+            </div>
+          </div>
+
+          <div class="h3">Resources</div>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:0.5rem;">
+            <div style="padding:0.65rem 1rem; background:#e8f0fe; border:1px solid #90caf9; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="window.open('https://docs.google.com/presentation/d/1Z1voryq0ZxMLgLXDpRbXS6EQnA7b7nju/edit?usp=sharing&ouid=115500034938372750790&rtpof=true&sd=true')">
+              <span style="font-size:16px;">🔗</span>
+              <span style="font-size:13px; font-weight:600; color:#1565c0; text-decoration:underline;">Voyageur — PM Case Study Deck ↗</span>
+            </div>
+          </div>
+
+        </div><!-- end voyageur detail -->
+
+      </div>
+    </div>
+  </div><!-- end ai-case-studies -->
+
+  <hr class="divider">
+
+  <!-- PRODUCT TEARDOWN SECTION REMOVED — now inside case studies -->
+
+  <!-- PROJECTS -->
+  <div id="projects">
+    <div class="toggle open">
+      <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="toggle-arrow">▶</span>
+        <span class="h1" style="margin:0;">Projects</span>
+      </div>
+      <div class="toggle-body">
+        <hr class="divider">
+
+        <div class="toggle open">
+          <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')" style="font-size:16px; font-weight:600;">
+            <span class="toggle-arrow">▶</span>
+            Selected case studies (deep dives)
+          </div>
+          <div class="toggle-body">
+
+        <div class="h3">1) NVH issue resolution (JLR suspension) — Tata Elxsi</div>
+        <div class="callout-grid">
+          <div class="callout yellow">
+            <div class="callout-label"><span class="callout-icon">◎</span> Outcome</div>
+            <p>Eliminated cabin noise across ~2,000 vehicles</p>
+            <p>Averted <strong>£1M+</strong> warranty exposure</p>
+          </div>
+          <div class="callout blue">
+            <div class="callout-label"><span class="callout-icon">◈</span> What I owned</div>
+            <p>Risk framing • stakeholder alignment • supplier execution • validation readiness</p>
+          </div>
+        </div>
+        <p><strong>Problem:</strong> Post-launch NVH impacting customer perception and warranty risk.</p>
+        <p><strong>Approach:</strong> Aligned customer perception, engineering trade-offs, and supplier execution to eliminate cabin noise across ~2,000 vehicles and avert £1M+ warranty exposure.</p>
+
+        <div class="h3">2) Component localization — Tata Elxsi</div>
+        <div class="callout-grid">
+          <div class="callout yellow">
+            <div class="callout-label"><span class="callout-icon">◎</span> Outcome</div>
+            <p><strong>£0.85M</strong> annual savings</p>
+            <p>Reduced BoM complexity</p>
+          </div>
+          <div class="callout blue">
+            <div class="callout-label"><span class="callout-icon">◈</span> What I owned</div>
+            <p>Localization strategy • supplier alignment • performance benchmarking</p>
+          </div>
+        </div>
+        <p><strong>Problem:</strong> High BoM complexity and cost for JLR suspension components.</p>
+        <p><strong>Approach:</strong> Drove suspension component localization to cut BoM complexity and deliver £0.85M annual savings while preserving customer-grade performance.</p>
+
+        <div class="h3">3) Release quality &amp; Agile delivery improvements — Tata Elxsi</div>
+        <div class="callout-grid">
+          <div class="callout yellow">
+            <div class="callout-label"><span class="callout-icon">◎</span> Outcome</div>
+            <p><strong>4.5/5 CSAT</strong> achieved</p>
+            <p>30% reduction in delays &amp; scope creep</p>
+          </div>
+          <div class="callout blue">
+            <div class="callout-label"><span class="callout-icon">◈</span> What I owned</div>
+            <p>PI planning • backlog grooming • sprint planning • retrospectives</p>
+          </div>
+        </div>
+        <p><strong>Problem:</strong> Inconsistent release quality and coordination gaps across 5+ global production facilities.</p>
+        <p><strong>Approach:</strong> Facilitated Agile ceremonies (PI planning, backlog grooming, sprint planning, retrospectives) → improved release quality. Strengthened stakeholder collaboration across 5+ global production facilities, reducing project delays and scope creep by 30%.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CERTIFICATIONS & EDUCATION -->
+  <div id="certs">
+    <div class="toggle open">
+      <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="toggle-arrow">▶</span>
+        <span class="h1" style="margin:0;">Certifications &amp; Education</span>
+      </div>
+      <div class="toggle-body">
+        <hr class="divider">
+        <ul class="nlist">
+          <li><strong>AI for Product Leaders</strong> — LinkedIn Learning (2025)</li>
+          <li><strong>Product Management</strong> — Alt Uni (2024)</li>
+          <li><strong>Bachelor of Technology, Mechanical Engineering</strong> — Chitkara University, India (August 2014 – July 2018)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CONTACT -->
+  <div id="contact">
+    <div class="toggle open">
+      <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="toggle-arrow">▶</span>
+        <span class="h1" style="margin:0;">Contact</span>
+      </div>
+      <div class="toggle-body">
+        <hr class="divider">
+        <div class="h2">Let's work together</div>
+        <ul class="nlist">
+          <li>Email: <a href="mailto:shivamrustagi.naukri@gmail.com">shivamrustagi.naukri@gmail.com</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/shivam-rustagi-16807bb6/" target="_blank">https://www.linkedin.com/in/shivam-rustagi-16807bb6/</a></li>
+          <li>Phone: +91-8307104267, 9008321040</li>
+          <li>Location: Bangalore, India</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+function toggleAIDetail(id) {
+  var grid = document.getElementById('ai-cs-grid');
+  var allDetails = document.querySelectorAll('#ai-case-studies .cs-detail');
+  var target = document.getElementById(id);
+  var isOpen = target.style.display !== 'none';
+
+  allDetails.forEach(function(d) { d.style.display = 'none'; });
+
+  if (isOpen) {
+    grid.style.display = 'grid';
+    window.scrollTo({ top: document.getElementById('ai-case-studies').offsetTop - 60, behavior: 'smooth' });
+  } else {
+    grid.style.display = 'none';
+    target.style.display = 'block';
+    window.scrollTo({ top: document.getElementById('ai-case-studies').offsetTop - 60, behavior: 'smooth' });
+  }
+}
+
+function toggleDetail(id) {
+  var grid = document.querySelector('.cs-grid');
+  var allDetails = document.querySelectorAll('.cs-detail');
+  var target = document.getElementById(id);
+  var isOpen = target.style.display !== 'none';
+
+  // Hide all details
+  allDetails.forEach(function(d) { d.style.display = 'none'; });
+
+  if (isOpen) {
+    // Was open — show grid, hide detail
+    grid.style.display = 'grid';
+    window.scrollTo({ top: document.getElementById('case-studies').offsetTop - 60, behavior: 'smooth' });
+  } else {
+    // Open this detail, hide grid
+    grid.style.display = 'none';
+    target.style.display = 'block';
+    window.scrollTo({ top: document.getElementById('case-studies').offsetTop - 60, behavior: 'smooth' });
+  }
+}
+</script>
+</body>
+</html>
